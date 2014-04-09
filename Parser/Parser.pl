@@ -15,7 +15,7 @@ sub dico {
 	while (<IN>)
 	{
 		chomp $_;
-		$doc .= $_;
+		$doc .= decode("utf8","$_");
 	}
 	my @doct = split /<\/entry>/,$doc;
 
@@ -41,19 +41,22 @@ sub dico {
 		next unless $type;
 		next unless ($type eq "noun" || $type eq "adj" || $type eq "adverb"
 			|| $type eq "conjc" || $type eq "det" || $type eq "pronoun" );
-		# On ne garde que les adjectifs, les noms, les adverbes et les conjonctions de coordinations.
+		# On ne garde que les adjectifs, les noms, les adverbes et les conjonctions de coordinations, les déterminants, les pronoms.
 		$h_mots{$mot}{$type} = \%h_derivation unless $h_mots{$mot}{$type};
 		
 		my @inflecteds = split /<\/inflected>/,$entry;
+
 		foreach my $inflected (@inflecteds) {
+
 			my $derivation = $1 if ($inflected =~ m/<form>([^<]+)<\/form>/);
 			$derivation =~ s/\\//;
+
 			my $genre = $1 if ($inflected =~ m/<feat name='gender' value='([^ ']+)'\/>/);
 			my $nombre = $1 if ($inflected =~ m/<feat name='number' value='([^ ']+)'\/>/);
 			$genre = "" unless $genre;
 			$nombre = "" unless $nombre;
 
-			$h_mots{$mot}{$type}{$derivation} = $genre." ".$nombre unless $h_mots{$mot}{$type}{$derivation};
+			$h_mots{$mot}{$type}{$derivation." ! ".$genre." ! ".$nombre} = 1 unless $h_mots{$mot}{$type}{$derivation."#".$genre."#".$nombre};
 		}
 	}
 
@@ -78,14 +81,21 @@ sub dico {
 
 	while (my ($mot,$v) = each %h_mots)
 	{	
-		while (my ($type,$vv) = each %$v)
-		{
-			# Dans $vv il y a en clef les dérivations du mot donné pour le type donné
-			# et les genres en valeur.
-			my %h_racines = (); # Clef = racine, valeur = numRacine.
+	 	while (my ($type,$vv) = each %$v)
+	 	{
+	 		my %h_racines = (); # Clef = racine, valeur = numRacine.
 
-			my @derivs = keys %$vv;
-			foreach my $deriv (@derivs) {
+			my %temph = %$vv;
+			my @derivEtcT = keys %temph;
+			foreach my $derivEtc (@derivEtcT) {
+				my @tempt = split / ! /,$derivEtc;
+				my $deriv = $tempt[0];
+
+				print $deriv."\n";
+
+				my $genre_et_nombre = "";
+				$genre_et_nombre = $tempt[1]." ".$tempt[2] if ($tempt[1] and $tempt[2]);
+
 				my $racine = "";
 				my $term = "";
 				my $mot_cpy = $mot;
@@ -113,25 +123,25 @@ sub dico {
 					$h_terms{$term} = $nombre_terms++ unless $h_terms{$term};
 				}
 
- 				if ($type eq 'adverb') {
+				if ($type eq 'adverb') {
 					# Dans ce cas la conjugaison exist déjà, c'est 0. Idem pour la terminaison.
-					my $s = "mot('$mot', ".$h_racines{$racine}.", '$racine', d0, 'adverbe').";
+					my $s = "mot('".encode("utf8","$mot")."', ".$h_racines{$racine}.", '".encode("utf8","$racine")."', d0, 'adverbe').";
 					$prolog_mots{$s} = 1 unless $prolog_mots{$s};
 				} elsif ($type eq 'conjc') {
-					my $s = "mot('$mot', ".$h_racines{$racine}.", '$racine', d0, 'Conjonction de coordination').";
+					my $s = "mot('".encode("utf8","$mot")."', ".$h_racines{$racine}.", '".encode("utf8","$racine")."', d0, 'Conjonction de coordination').";
 					$prolog_mots{$s} = 1 unless $prolog_mots{$s};
 				} else {
 					# Ici il faut vérifier et trouver le numéro de terminaison.
+				
 					my $personne = 1;
-					my %vvv = %$vv;
-					$personne = 2 if ($vvv{$deriv} eq 'masculine plural');
-					$personne = 3 if ($vvv{$deriv} eq 'feminine singular');
-					$personne = 4 if ($vvv{$deriv} eq 'feminine plural');
+					$personne = 2 if ($genre_et_nombre eq 'masculine plural');
+					$personne = 3 if ($genre_et_nombre eq 'feminine singular');
+					$personne = 4 if ($genre_et_nombre eq 'feminine plural');
 
 					my $groupe = "Masculin Singulier";
-					$groupe = "Masculin Pluriel" if ($vvv{$deriv} eq 'masculine plural');
-					$groupe = "Feminin Singulier" if ($vvv{$deriv} eq 'feminine singular');
-					$groupe = "Feminin Pluriel" if ($vvv{$deriv} eq 'feminine plural');
+					$groupe = "Masculin Pluriel" if ($genre_et_nombre eq 'masculine plural');
+					$groupe = "Feminin Singulier" if ($genre_et_nombre eq 'feminine singular');
+					$groupe = "Feminin Pluriel" if ($genre_et_nombre eq 'feminine plural');
 
 					my $type_m = "nom";
 					$type_m = "adjectif" if ($type eq "adj");
@@ -143,20 +153,20 @@ sub dico {
 
 					my $id_conj = $h_conjs{$personne." ".$h_terms{$term}." ".$h_racines{$racine}};
 					my $id_term = $h_terms{$term};
-					my $string_mot = "mot('$mot', ".$h_racines{$racine}.", '$racine', d$id_conj, '$type_m').";
+					my $string_mot = "mot('".encode("utf8","$mot")."', ".$h_racines{$racine}.", '".encode("utf8","$racine")."', d$id_conj, '$type_m').";
 					$prolog_mots{$string_mot} = 1 unless $prolog_mots{$string_mot};
 
 					my $string_conj = "conjugaison(d$id_conj, '$groupe', d$id_term, $personne, ".$h_racines{$racine}.", '').";
 					$prolog_conjs{$string_conj} = 1 unless $prolog_conjs{$string_conj};
 
 					if ($term ne "-") {
-						my $string_term = "terminaison(d$id_term, '$term', $personne).";
+						my $string_term = "terminaison(d$id_term, '".encode("utf8","$term")."', $personne).";
 						$prolog_terms{$string_term} = 1 unless $prolog_terms{$string_term};
 					} else {
 						my $string_term = "terminaison(d$id_term, '', $personne).";
 						$prolog_terms{$string_term} = 1 unless $prolog_terms{$string_term};
 					}
-	 			}
+				}
 			}
 		}
 	}
