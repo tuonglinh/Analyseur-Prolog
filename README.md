@@ -2,6 +2,8 @@
 
 __Analyseur syntaxique et sémantique du français en Prolog__
 
+Projet réaliser dans le cadre de l'UE TALN de la L3 Informatique de l'UJM.
+
 _Le dictionnaire utiliser n'est pas sur le dépôt car il faut plus de 100Mo, mais vous le trouverez facilement sur le web sous le nom de dela-fr-public-u8.dic.xml :smiley:_
 
 ###Première partie
