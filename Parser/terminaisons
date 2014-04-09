@@ -1,0 +1,887 @@
+0 e es e ons ez ent 
+1 é é é é é é 
+2 ais ais ait ions iez aient 
+3 ai as a âmes âtes èrent 
+4 erai eras era erons erez eront 
+5 erais erais erait erions eriez eraient 
+6 e es e ions iez ent 
+7 asse asses ât assions assiez assent 
+8 e ons ez 
+9 é é é 
+10 er 
+11 é 
+12 ant 
+13 é é 
+14 is is it issons issez issent 
+15 i i i i i i 
+16 issais issais issait issions issiez issaient 
+17 is is it îmes îtes irent 
+18 irai iras ira irons irez iront 
+19 irais irais irait irions iriez iraient 
+20 isse isses isse issions issiez issent 
+21 isse isses ît issions issiez issent 
+22 is issons issez 
+23 i i i 
+24 ir 
+25 i 
+26 issant 
+27 i i 
+28 s s NULL tons tez tent 
+29 tu tu tu tu tu tu 
+30 tais tais tait tions tiez taient 
+31 tis tis tit tîmes tîtes tirent 
+32 trai tras tra trons trez tront 
+33 trais trais trait trions triez traient 
+34 te tes te tions tiez tent 
+35 tisse tisses tît tissions tissiez tissent 
+36 s tons tez 
+37 tu tu tu 
+38 tre 
+39 tu 
+40 tant 
+41 tu tu 
+42 ie ies ie yons yez ient 
+43 yé yé yé yé yé yé 
+44 yais yais yait yions yiez yaient 
+45 yai yas ya yâmes yâtes yèrent 
+46 ierai ieras iera ierons ierez ieront 
+47 ierais ierais ierait ierions ieriez ieraient 
+48 ie ies ie yions yiez ient 
+49 yasse yasses yât yassions yassiez yassent 
+50 ie yons yez 
+51 yé yé yé 
+52 yer 
+53 yé 
+54 yant 
+55 yé yé 
+56 ège èges ège égeons égez ègent 
+57 égeais égeais égeait égions égiez égeaient 
+58 égeai égeas égea égeâmes égeâtes égèrent 
+59 égerai égeras égera égerons égerez égeront 
+60 égerais égerais égerait égerions égeriez égeraient 
+61 ège èges ège égions égiez ègent 
+62 égeasse égeasses égeât égeassions égeassiez égeassent 
+63 ège égeons égez 
+64 éger 
+65 égeant 
+66 é é é és és és 
+67 e-toi ons-nous ez-vous 
+68 - - - 
+69 - é 
+70 us us ut lvons lvez lvent 
+71 us us us us us us 
+72 lvais lvais lvait lvions lviez lvaient 
+73 - - - - - - 
+74 udrai udras udra udrons udrez udront 
+75 udrais udrais udrait udrions udriez udraient 
+76 lve lves lve lvions lviez lvent 
+77 us lvons lvez 
+78 us us us 
+79 udre 
+80 us 
+81 lvant 
+82 us us 
+83 iens iens ient enons enez iennent 
+84 enu enu enu enus enus enus 
+85 enais enais enait enions eniez enaient 
+86 ins ins int înmes întes inrent 
+87 iendrai iendras iendra iendrons iendrez iendront 
+88 iendrais iendrais iendrait iendrions iendriez iendraient 
+89 ienne iennes ienne enions eniez iennent 
+90 insse insses înt inssions inssiez inssent 
+91 iens-toi enons-nous enez-vous 
+92 enir 
+93 enu 
+94 enant 
+95 - enu 
+96 is is it yons yez ient 
+97 it it it it it it 
+98 is yons yez 
+99 it it it 
+100 ire 
+101 it 
+102 it it 
+103 ède èdes ède édons édez èdent 
+104 édais édais édait édions édiez édaient 
+105 édai édas éda édâmes édâtes édèrent 
+106 éderai éderas édera éderons éderez éderont 
+107 éderais éderais éderait éderions éderiez éderaient 
+108 ède èdes ède édions édiez èdent 
+109 édasse édasses édât édassions édassiez édassent 
+110 ède édons édez 
+111 éder 
+112 édant 
+113 ère ères ère érons érez èrent 
+114 érais érais érait érions ériez éraient 
+115 érai éras éra érâmes érâtes érèrent 
+116 érerai éreras érera érerons érerez éreront 
+117 érerais érerais érerait érerions éreriez éreraient 
+118 ère ères ère érions ériez èrent 
+119 érasse érasses érât érassions érassiez érassent 
+120 ère érons érez 
+121 érer 
+122 érant 
+123 s s t ons ez ent 
+124 u u u u u u 
+125 us us ut ûmes ûtes urent 
+126 rai ras ra rons rez ront 
+127 rais rais rait rions riez raient 
+128 usse usses ût ussions ussiez ussent 
+129 s ons ez 
+130 u u u 
+131 u 
+132 u u 
+133 oire 
+134 - 
+135 - - 
+136 ois ois oît oissons oissez oissent 
+137 oissais oissais oissait oissions oissiez oissaient 
+138 oîtrai oîtras oîtra oîtrons oîtrez oîtront 
+139 oîtrais oîtrais oîtrait oîtrions oîtriez oîtraient 
+140 oisse oisses oisse oissions oissiez oissent 
+141 ois oissons oissez 
+142 oître 
+143 oissant 
+144 i i i is is is 
+145 is-toi issons-nous issez-vous 
+146 - i 
+147 ète ètes ète etons etez ètent 
+148 etais etais etait etions etiez etaient 
+149 etai etas eta etâmes etâtes etèrent 
+150 èterai èteras ètera èterons èterez èteront 
+151 èterais èterais èterait èterions èteriez èteraient 
+152 ète ètes ète etions etiez ètent 
+153 etasse etasses etât etassions etassiez etassent 
+154 ète etons etez 
+155 eter 
+156 etant 
+157 ève èves ève evons evez èvent 
+158 evais evais evait evions eviez evaient 
+159 evai evas eva evâmes evâtes evèrent 
+160 èverai èveras èvera èverons èverez èveront 
+161 èverais èverais èverait èverions èveriez èveraient 
+162 ève èves ève evions eviez èvent 
+163 evasse evasses evât evassions evassiez evassent 
+164 ève evons evez 
+165 ever 
+166 evant 
+167 èle èles èle elons elez èlent 
+168 elais elais elait elions eliez elaient 
+169 elai elas ela elâmes elâtes elèrent 
+170 èlerai èleras èlera èlerons èlerez èleront 
+171 èlerais èlerais èlerait èlerions èleriez èleraient 
+172 èle èles èle elions eliez èlent 
+173 elasse elasses elât elassions elassiez elassent 
+174 èle elons elez 
+175 eler 
+176 elant 
+177 iers iers iert érons érez ièrent 
+178 is is is is is is 
+179 errai erras erra errons errez erront 
+180 errais errais errait errions erriez erraient 
+181 ière ières ière érions ériez ièrent 
+182 iers érons érez 
+183 is is is 
+184 érir 
+185 is 
+186 is is 
+187 ce ces ce çons cez cent 
+188 cé cé cé cé cé cé 
+189 çais çais çait cions ciez çaient 
+190 çai ças ça çâmes çâtes cèrent 
+191 cerai ceras cera cerons cerez ceront 
+192 cerais cerais cerait cerions ceriez ceraient 
+193 ce ces ce cions ciez cent 
+194 çasse çasses çât çassions çassiez çassent 
+195 ce çons cez 
+196 cé cé cé 
+197 cer 
+198 cé 
+199 çant 
+200 cé cé 
+201 ns ns nt gnons gnez gnent 
+202 nt nt nt nt nt nt 
+203 gnais gnais gnait gnions gniez gnaient 
+204 gnis gnis gnit gnîmes gnîtes gnirent 
+205 ndrai ndras ndra ndrons ndrez ndront 
+206 ndrais ndrais ndrait ndrions ndriez ndraient 
+207 gne gnes gne gnions gniez gnent 
+208 gnisse gnisses gnît gnissions gnissiez gnissent 
+209 ns gnons gnez 
+210 nt nt nt 
+211 ndre 
+212 nt 
+213 gnant 
+214 nt nt 
+215 ets ets et ettons ettez ettent 
+216 ettais ettais ettait ettions ettiez ettaient 
+217 ettrai ettras ettra ettrons ettrez ettront 
+218 ettrais ettrais ettrait ettrions ettriez ettraient 
+219 ette ettes ette ettions ettiez ettent 
+220 ets ettons ettez 
+221 ettre 
+222 ettant 
+223 - - ient - - - 
+224 - - enu - - - 
+225 - - enait - - - 
+226 - - int - - - 
+227 - - iendra - - - 
+228 - - iendrait - - - 
+229 - - ienne - - - 
+230 - - înt - - - 
+231 enu enu 
+232 e es e eons ez ent 
+233 eais eais eait ions iez eaient 
+234 eai eas ea eâmes eâtes èrent 
+235 easse easses eât eassions eassiez eassent 
+236 e eons ez 
+237 eant 
+238 ène ènes ène énons énez ènent 
+239 énais énais énait énions éniez énaient 
+240 énai énas éna énâmes énâtes énèrent 
+241 énerai éneras énera énerons énerez éneront 
+242 énerais énerais énerait énerions éneriez éneraient 
+243 ène ènes ène énions éniez ènent 
+244 énasse énasses énât énassions énassiez énassent 
+245 ène énons énez 
+246 éner 
+247 énant 
+248 èche èches èche échons échez èchent 
+249 échais échais échait échions échiez échaient 
+250 échai échas écha échâmes échâtes échèrent 
+251 écherai écheras échera écherons écherez écheront 
+252 écherais écherais écherait écherions écheriez écheraient 
+253 èche èches èche échions échiez èchent 
+254 échasse échasses échât échassions échassiez échassent 
+255 èche échons échez 
+256 écher 
+257 échant 
+258 ègue ègues ègue éguons éguez èguent 
+259 éguais éguais éguait éguions éguiez éguaient 
+260 éguai éguas égua éguâmes éguâtes éguèrent 
+261 éguerai égueras éguera éguerons éguerez égueront 
+262 éguerais éguerais éguerait éguerions égueriez égueraient 
+263 ègue ègues ègue éguions éguiez èguent 
+264 éguasse éguasses éguât éguassions éguassiez éguassent 
+265 ègue éguons éguez 
+266 éguer 
+267 éguant 
+268 vais vas va allons allez vont 
+269 allé allé allé allés allés allés 
+270 allais allais allait allions alliez allaient 
+271 allai allas alla allâmes allâtes allèrent 
+272 aille ailles aille allions alliez aillent 
+273 allasse allasses allât allassions allassiez allassent 
+274 
+275 allé allés allés 
+276 allé 
+277 allé allé 
+278 allant 
+279 ène ènes ène enons enez ènent 
+280 enai enas ena enâmes enâtes enèrent 
+281 ènerai èneras ènera ènerons ènerez èneront 
+282 ènerais ènerais ènerait ènerions èneriez èneraient 
+283 ène ènes ène enions eniez ènent 
+284 enasse enasses enât enassions enassiez enassent 
+285 ène enons enez 
+286 ener 
+287 l l l NULL NULL l 
+288 NULL NULL NULL NULL NULL NULL 
+289 l l l l l l 
+290 l 
+291 çois çois çoit cevons cevez çoivent 
+292 çu çu çu çu çu çu 
+293 cevais cevais cevait cevions ceviez cevaient 
+294 çus çus çut çûmes çûtes çurent 
+295 cevrai cevras cevra cevrons cevrez cevront 
+296 cevrais cevrais cevrait cevrions cevriez cevraient 
+297 çoive çoives çoive cevions ceviez çoivent 
+298 çusse çusses çût çussions çussiez çussent 
+299 çois cevons cevez 
+300 çu çu çu 
+301 cevoir 
+302 çu 
+303 cevant 
+304 çu çu 
+305 ais ais aît aissons aissez aissent 
+306 aissais aissais aissait aissions aissiez aissaient 
+307 aîtrai aîtras aîtra aîtrons aîtrez aîtront 
+308 aîtrais aîtrais aîtrait aîtrions aîtriez aîtraient 
+309 aisse aisses aisse aissions aissiez aissent 
+310 ais aissons aissez 
+311 aître 
+312 aissant 
+313 enu enu enu enu enu enu 
+314 iens enons enez 
+315 enu enu enu 
+316 s s NULL ons ez ent 
+317 re 
+318 ends ends end enons enez ennent 
+319 endrai endras endra endrons endrez endront 
+320 endrais endrais endrait endrions endriez endraient 
+321 enne ennes enne enions eniez ennent 
+322 ends enons enez 
+323 endre 
+324 é és és 
+325 oir 
+326 ieds ieds ied eyons eyez eyent 
+327 eyais eyais eyait eyions eyiez eyaient 
+328 iérai iéras iéra iérons iérez iéront 
+329 iérais iérais iérait iérions iériez iéraient 
+330 eye eyes eye eyions eyiez eyent 
+331 ieds eyons eyez 
+332 eoir 
+333 eyant 
+334 ai as a avons avez ont 
+335 eu eu eu eu eu eu 
+336 avais avais avait avions aviez avaient 
+337 eus eus eut eûmes eûtes eurent 
+338 aurai auras aura aurons aurez auront 
+339 aurais aurais aurait aurions auriez auraient 
+340 aie aies ait ayons ayez aient 
+341 eusse eusses eût eussions eussiez eussent 
+342 eu eu eu 
+343 eu 
+344 eu eu 
+345 ayant 
+346 ois ois oit uvons uvez oivent 
+347 uvais uvais uvait uvions uviez uvaient 
+348 oirai oiras oira oirons oirez oiront 
+349 oirais oirais oirait oirions oiriez oiraient 
+350 oive oives oive uvions uviez oivent 
+351 ois uvons uvez 
+352 uvant 
+353 s s t illons illez illent 
+354 illi illi illi illi illi illi 
+355 illais illais illait illions illiez illaient 
+356 illis illis illit illîmes illîtes illirent 
+357 illirai illiras illira illirons illirez illiront 
+358 illirais illirais illirait illirions illiriez illiraient 
+359 ille illes ille illions illiez illent 
+360 illisse illisses illît illissions illissiez illissent 
+361 s illons illez 
+362 illi illi illi 
+363 illir 
+364 illi 
+365 illant 
+366 illi illi 
+367 - - it - - ient 
+368 - - it - - it 
+369 - - yait - - yaient 
+370 - - ira - - iront 
+371 - - irait - - iraient 
+372 - - ie - - ient 
+373 t t t NULL NULL t 
+374 t t t t t t 
+375 t 
+376 - - it - - issent 
+377 - - issait - - issaient 
+378 - - isse - - issent 
+379 - - e - - - 
+380 - - é - - - 
+381 - - ait - - - 
+382 - - a - - - 
+383 - - era - - - 
+384 - - erait - - - 
+385 - - ât - - - 
+386 èbre èbres èbre ébrons ébrez èbrent 
+387 ébrais ébrais ébrait ébrions ébriez ébraient 
+388 ébrai ébras ébra ébrâmes ébrâtes ébrèrent 
+389 ébrerai ébreras ébrera ébrerons ébrerez ébreront 
+390 ébrerais ébrerais ébrerait ébrerions ébreriez ébreraient 
+391 èbre èbres èbre ébrions ébriez èbrent 
+392 ébrasse ébrasses ébrât ébrassions ébrassiez ébrassent 
+393 èbre ébrons ébrez 
+394 ébrer 
+395 ébrant 
+396 - - ut - - - 
+397 loir 
+398 ois ois oit oyons oyez oient 
+399 - - ût - - - 
+400 is is it isons isez isent 
+401 isais isais isait isions isiez isaient 
+402 ise ises ise isions isiez isent 
+403 is isons isez 
+404 isant 
+405 s s t vons vez vent 
+406 vais vais vait vions viez vaient 
+407 vis vis vit vîmes vîtes virent 
+408 ve ves ve vions viez vent 
+409 visse visses vît vissions vissiez vissent 
+410 s vons vez 
+411 t t t 
+412 vant 
+413 t t 
+414 os os ôt - - osent 
+415 os os os os os os 
+416 orai oras ora orons orez oront 
+417 orais orais orait orions oriez oraient 
+418 ose oses ose osions osiez osent 
+419 os - - 
+420 os os os 
+421 ore 
+422 os 
+423 osant 
+424 os os 
+425 ais ais aît aisons aisez aisent 
+426 aisais aisais aisait aisions aisiez aisaient 
+427 airai airas aira airons airez airont 
+428 airais airais airait airions airiez airaient 
+429 aise aises aise aisions aisiez aisent 
+430 ais aisons aisez 
+431 aire 
+432 aisant 
+433 ète ètes ète étons étez ètent 
+434 étais étais était étions étiez étaient 
+435 étai étas éta étâmes étâtes étèrent 
+436 éterai éteras étera éterons éterez éteront 
+437 éterais éterais éterait éterions éteriez éteraient 
+438 ète ètes ète étions étiez ètent 
+439 étasse étasses étât étassions étassiez étassent 
+440 ète étons étez 
+441 éter 
+442 étant 
+443 us us ut uons uez uent 
+444 uais uais uait uions uiez uaient 
+445 urai uras ura urons urez uront 
+446 urais urais urait urions uriez uraient 
+447 ue ues ue uions uiez uent 
+448 us uons uez 
+449 ure 
+450 uant 
+451 s s t sons sez sent 
+452 sais sais sait sions siez saient 
+453 sis sis sit sîmes sîtes sirent 
+454 se ses se sions siez sent 
+455 sisse sisses sît sissions sissiez sissent 
+456 s sons sez 
+457 sant 
+458 s s t tons tez tent 
+459 ti ti ti ti ti ti 
+460 tirai tiras tira tirons tirez tiront 
+461 tirais tirais tirait tirions tiriez tiraient 
+462 ti ti ti 
+463 tir 
+464 ti 
+465 ti ti 
+466 ais ais ait aisons aites ont 
+467 ait ait ait ait ait ait 
+468 asse asses asse assions assiez assent 
+469 ais aisons aites 
+470 ait ait ait 
+471 ait 
+472 ait ait 
+473 cs cs c quons quez quent 
+474 cu cu cu cu cu cu 
+475 quais quais quait quions quiez quaient 
+476 quis quis quit quîmes quîtes quirent 
+477 crai cras cra crons crez cront 
+478 crais crais crait crions criez craient 
+479 que ques que quions quiez quent 
+480 quisse quisses quît quissions quissiez quissent 
+481 cs quons quez 
+482 cu cu cu 
+483 cre 
+484 cu 
+485 quant 
+486 cu cu 
+487 èle èles èle élons élez èlent 
+488 élais élais élait élions éliez élaient 
+489 élai élas éla élâmes élâtes élèrent 
+490 élerai éleras élera élerons élerez éleront 
+491 élerais élerais élerait élerions éleriez éleraient 
+492 èle èles èle élions éliez èlent 
+493 élasse élasses élât élassions élassiez élassent 
+494 èle élons élez 
+495 éler 
+496 élant 
+497 ds ds d sons sez sent 
+498 su su su su su su 
+499 drai dras dra drons drez dront 
+500 drais drais drait drions driez draient 
+501 ds sons sez 
+502 su su su 
+503 dre 
+504 su 
+505 su su 
+506 re res re rons rez rent 
+507 ert ert ert ert ert ert 
+508 ris ris rit rîmes rîtes rirent 
+509 rirai riras rira rirons rirez riront 
+510 rirais rirais rirait ririons ririez riraient 
+511 re res re rions riez rent 
+512 risse risses rît rissions rissiez rissent 
+513 re rons rez 
+514 ert ert ert 
+515 rir 
+516 ert 
+517 rant 
+518 ert ert 
+519 oyais oyais oyait oyions oyiez oyaient 
+520 oie oies oie oyions oyiez oient 
+521 ois oyons oyez 
+522 oyant 
+523 oîs oîs oît oissons oissez oissent 
+524 û û û û û û 
+525 ûs ûs ût ûmes ûtes ûrent 
+526 ûsse ûsses ût ûssions ûssiez ûssent 
+527 oîs oissons oissez 
+528 û û û 
+529 û 
+530 û û 
+531 èce èces èce eçons ecez ècent 
+532 ecé ecé ecé ecé ecé ecé 
+533 eçais eçais eçait ecions eciez eçaient 
+534 eçai eças eça eçâmes eçâtes ecèrent 
+535 ècerai èceras ècera ècerons ècerez èceront 
+536 ècerais ècerais ècerait ècerions èceriez èceraient 
+537 èce èces èce ecions eciez ècent 
+538 eçasse eçasses eçât eçassions eçassiez eçassent 
+539 ece eçons ecez 
+540 ecé ecé ecé 
+541 ecer 
+542 ecé 
+543 eçant 
+544 ecé ecé 
+545 vi vi vi vi vi vi 
+546 virai viras vira virons virez viront 
+547 virais virais virait virions viriez viraient 
+548 vi vi vi 
+549 vir 
+550 vi 
+551 vi vi 
+552 enu enus enus 
+553 ois ois oit evons evez oivent 
+554 evrai evras evra evrons evrez evront 
+555 evrais evrais evrait evrions evriez evraient 
+556 oive oives oive evions eviez oivent 
+557 ois evons evez 
+558 evoir 
+559 is is it isons ites isent 
+560 is isons ites 
+561 s s t mons mez ment 
+562 mi mi mi mi mi mi 
+563 mais mais mait mions miez maient 
+564 mis mis mit mîmes mîtes mirent 
+565 mirai miras mira mirons mirez miront 
+566 mirais mirais mirait mirions miriez miraient 
+567 me mes me mions miez ment 
+568 misse misses mît missions missiez missent 
+569 s mons mez 
+570 mi mi mi 
+571 mir 
+572 mi 
+573 mant 
+574 mi mi 
+575 s s tons tez tent 
+576 tu tu tu tus tus tus 
+577 s-toi tons-nous tez-vous 
+578 - tu 
+579 - - oit - - oient 
+580 - - u - - us 
+581 - - oyait - - oyaient 
+582 - - ut - - urent 
+583 - - oira - - oiront 
+584 - - oirait - - oiraient 
+585 - - oie - - oient 
+586 - - ût - - ussent 
+587 éant 
+588 os os ot - - osent 
+589 cé cé cé cés cés cés 
+590 ce-toi çons-nous cez-vous 
+591 - cé 
+592 u u u us us us 
+593 ois-toi uvons-nous uvez-vous 
+594 - u 
+595 ds ds d lons lez lent 
+596 lu lu lu lu lu lu 
+597 lais lais lait lions liez laient 
+598 lus lus lut lûmes lûtes lurent 
+599 le les le lions liez lent 
+600 lusse lusses lût lussions lussiez lussent 
+601 ds lons lez 
+602 lu lu lu 
+603 lu 
+604 lant 
+605 lu lu 
+606 eus eus eut ouvons ouvez euvent 
+607 ouvais ouvais ouvait ouvions ouviez ouvaient 
+608 ouvrai ouvras ouvra ouvrons ouvrez ouvront 
+609 ouvrais ouvrais ouvrait ouvrions ouvriez ouvraient 
+610 euve euves euve ouvions ouviez euvent 
+611 eus ouvons ouvez 
+612 ouvoir 
+613 ouvant 
+614 os os ot osons osez osent 
+615 os osons osez 
+616 is-toi yons-nous yez-vous 
+617 iers-toi érons-nous érez-vous 
+618 - is 
+619 - - t - - - 
+620 - - vi - - - 
+621 - - vait - - - 
+622 - - vit - - - 
+623 - - vra - - - 
+624 - - vrait - - - 
+625 - - ve - - - 
+626 - - vît - - - 
+627 vre 
+628 - vi 
+629 oie oies oie oyons oyez oient 
+630 oyé oyé oyé oyé oyé oyé 
+631 oyai oyas oya oyâmes oyâtes oyèrent 
+632 oyasse oyasses oyât oyassions oyassiez oyassent 
+633 oie oyons oyez 
+634 oyé oyé oyé 
+635 oyer 
+636 oyé 
+637 oyé oyé 
+638 ends-toi enons-nous enez-vous 
+639 ux ux ut lons lez lent 
+640 ille illes ille lions liez illent 
+641 ux lons lez 
+642 suis es est sommes êtes sont 
+643 été été été été été été 
+644 fus fus fut fûmes fûtes furent 
+645 serai seras sera serons serez seront 
+646 serais serais serait serions seriez seraient 
+647 sois sois soit soyons soyez soient 
+648 fusse fusses fût fussions fussiez fussent 
+649 été été été 
+650 été 
+651 été été 
+652 ècre ècres ècre écrons écrez ècrent 
+653 écrais écrais écrait écrions écriez écraient 
+654 écrai écras écra écrâmes écrâtes écrèrent 
+655 écrerai écreras écrera écrerons écrerez écreront 
+656 écrerais écrerais écrerait écrerions écreriez écreraient 
+657 ècre ècres ècre écrions écriez ècrent 
+658 écrasse écrasses écrât écrassions écrassiez écrassent 
+659 ècre écrons écrez 
+660 écrer 
+661 écrant 
+662 aux aux aut aillons aillez aillent 
+663 ailli ailli ailli ailli ailli ailli 
+664 aillais aillais aillait aillions ailliez aillaient 
+665 aillis aillis aillit aillîmes aillîtes aillirent 
+666 aillirai ailliras aillira aillirons aillirez ailliront 
+667 aillirais aillirais aillirait aillirions ailliriez ailliraient 
+668 aillisse aillisses aillisse aillissions aillissiez aillissent 
+669 aillisse aillisses aillît aillissions aillissiez aillissent 
+670 aillir 
+671 ailli 
+672 aillant 
+673 ailli ailli 
+674 - - llu - - - 
+675 - - llait - - - 
+676 - - llut - - - 
+677 - - udra - - - 
+678 - - udrait - - - 
+679 - - ille - - - 
+680 - - llût - - - 
+681 lloir 
+682 llu llu 
+683 is is it - - - 
+684 it it it - - - 
+685 isais isais isait - - - 
+686 irai iras ira - - - 
+687 irais irais irait - - - 
+688 is - - 
+689 it - - 
+690 is is ît isons isez isent 
+691 - - ce - - - 
+692 - - cé - - - 
+693 - - çait - - - 
+694 - - ça - - - 
+695 - - cera - - - 
+696 - - cerait - - - 
+697 - - çât - - - 
+698 is is it ïssons ïssez ïssent 
+699 ï ï ï ï ï ï 
+700 ïssais ïssais ïssait ïssions ïssiez ïssaient 
+701 ïs ïs ït ïmes ïtes ïrent 
+702 ïrai ïras ïra ïrons ïrez ïront 
+703 ïrais ïrais rait ïrions ïriez ïraient 
+704 ïsse ïsses ïsse ïssions ïssiez ïssent 
+705 ïsse ïsses ït ïssions ïssiez ïssent 
+706 is ïssons ïssez 
+707 ï ï ï 
+708 ïr 
+709 ï 
+710 ïssant 
+711 ï ï 
+712 ègne ègnes ègne égnons égnez ègnent 
+713 égnais égnais égnait égnions égniez égnaient 
+714 égnai égnas égna égnâmes égnâtes égnèrent 
+715 égnerai égneras égnera égnerons égnerez égneront 
+716 égnerais égnerais égnerait égnerions égneriez égneraient 
+717 ègne ègnes ègne égnions égniez ègnent 
+718 égnasse égnasses égnât égnassions égnassiez égnassent 
+719 ègne égnons égnez 
+720 égner 
+721 égnant 
+722 ègre ègres ègre égrons égrez ègrent 
+723 égrais égrais égrait égrions égriez égraient 
+724 égrai égras égra égrâmes égrâtes égrèrent 
+725 égrerai égreras égrera égrerons égrerez égreront 
+726 égrerais égrerais égrerait égrerions égreriez égreraient 
+727 ègre ègres ègre égrions égriez ègrent 
+728 égrasse égrasses égrât égrassions égrassiez égrassent 
+729 ègre égrons égrez 
+730 égrer 
+731 égrant 
+732 èse èses èse ésons ésez èsent 
+733 ésais ésais ésait ésions ésiez ésaient 
+734 ésai ésas ésa ésâmes ésâtes ésèrent 
+735 éserai éseras ésera éserons éserez éseront 
+736 éserais éserais éserait éserions éseriez éseraient 
+737 èse èses èse ésions ésiez èsent 
+738 ésasse ésasses ésât ésassions ésassiez ésassent 
+739 èse ésons ésez 
+740 éser 
+741 ésant 
+742 isis isis isit isîmes isîtes isirent 
+743 isisse isisses isît isissions isissiez isissent 
+744 ètre ètres ètre étrons étrez ètrent 
+745 étrais étrais étrait étrions étriez étraient 
+746 étrai étras étra étrâmes étrâtes étrèrent 
+747 étrerai étreras étrera étrerons étrerez étreront 
+748 étrerais étrerais étrerait étrerions étreriez étreraient 
+749 ètre ètres ètre étrions étriez ètrent 
+750 étrasse étrasses étrât étrassions étrassiez étrassent 
+751 ètre étrons étrez 
+752 étrer 
+753 étrant 
+754 s-toi ons-nous ez-vous 
+755 eurs eurs eurt ourons ourez eurent 
+756 ort ort ort orts orts orts 
+757 ourais ourais ourait ourions ouriez ouraient 
+758 ourus ourus ourut ourûmes ourûtes oururent 
+759 ourrai ourras ourra ourrons ourrez ourront 
+760 ourrais ourrais ourrait ourrions ourriez ourraient 
+761 eure eures eure ourions ouriez eurent 
+762 ourusse ourusses ourût ourussions ourussiez ourussent 
+763 eurs ourons ourez 
+764 ort orts orts 
+765 ourir 
+766 ort 
+767 ourant 
+768 ort ort 
+769 aquis aquis aquit aquîmes aquîtes aquirent 
+770 aquisse aquisses aquît aquissions aquissiez aquissent 
+771 - - eait - - - 
+772 - - ea - - - 
+773 - - eât - - - 
+774 ouï ouï ouï ouï ouï ouï 
+775 ouï 
+776 ouï - 
+777 ti ti ti tis tis tis 
+778 ti tis tis 
+779 èse èses èse esons esez èsent 
+780 esais esais esait esions esiez esaient 
+781 esai esas esa esâmes esâtes esèrent 
+782 èserai èseras èsera èserons èserez èseront 
+783 èserais èserais èserait èserions èseriez èseraient 
+784 èse èses èse esions esiez èsent 
+785 esasse esasses esât esassions esassiez esassent 
+786 èse esons esez 
+787 eser 
+788 esant 
+789 - - eut - - - 
+790 - - u - - - 
+791 - - euvait - - - 
+792 - - euvra - - - 
+793 - - euvrait - - - 
+794 - - euve - - - 
+795 euvoir 
+796 euvant 
+797 - - nt - - - 
+798 - - gnait - - - 
+799 - - gnit - - - 
+800 - - ndra - - - 
+801 - - ndrait - - - 
+802 - - gne - - - 
+803 - - gnît - - - 
+804 vrai vras vra vrons vrez vront 
+805 vrais vrais vrait vrions vriez vraient 
+806 eux eux eut ouvons ouvez euvent 
+807 uisse uisses uisse uissions uissiez uissent 
+808 ègle ègles ègle églons églez èglent 
+809 églais églais églait églions égliez églaient 
+810 églai églas égla églâmes églâtes églèrent 
+811 églerai égleras églera églerons églerez égleront 
+812 églerais églerais églerait églerions égleriez égleraient 
+813 ègle ègles ègle églions égliez èglent 
+814 églasse églasses églât églassions églassiez églassent 
+815 ègle églons églez 
+816 égler 
+817 églant 
+818 - ti 
+819 is is it ivons ivez ivent 
+820 écu écu écu écu écu écu 
+821 ivais ivais ivait ivions iviez ivaient 
+822 écus écus écut écûmes écûtes écurent 
+823 ivrai ivras ivra ivrons ivrez ivront 
+824 ivrais ivrais ivrait ivrions ivriez ivraient 
+825 ive ives ive ivions iviez ivent 
+826 écusse écusses écût écussions écussiez écussent 
+827 is ivons ivez 
+828 écu écu écu 
+829 ivre 
+830 écu 
+831 ivant 
+832 écu écu 
+833 eux eux eut oulons oulez eulent 
+834 oulu oulu oulu oulu oulu oulu 
+835 oulais oulais oulait oulions ouliez oulaient 
+836 oulus oulus oulut oulûmes oulûtes oulurent 
+837 oudrai oudras oudra oudrons oudrez oudront 
+838 oudrais oudrais oudrait oudrions oudriez oudraient 
+839 euille euilles euille oulions ouliez euillent 
+840 oulusse oulusses oulût oulussions oulussiez oulussent 
+841 eux oulons oulez 
+842 oulu oulu oulu 
+843 ouloir 
+844 oulu 
+845 oulant 
+846 oulu oulu 
+847 is is it ions iez ient 
+848 iais iais iait iions iiez iaient 
+849 ie ies ie iions iiez ient 
+850 is ions iez 
+851 iant 
+852 ais ais ait avons avez avent 
+853 ache aches ache achions achiez achent 
+854 ache achons achez 
+855 avoir 
+856 achant 
+857 ème èmes ème emons emez èment 
+858 emais emais emait emions emiez emaient 
+859 emai emas ema emâmes emâtes emèrent 
+860 èmerai èmeras èmera èmerons èmerez èmeront 
+861 èmerais èmerais èmerait èmerions èmeriez èmeraient 
+862 ème èmes ème emions emiez èment 
+863 emasse emasses emât emassions emassiez emassent 
+864 ème emons emez 
+865 emer 
+866 emant 
+867 - - sied - - siéent 
+868 - - seyait - - seyaient 
+869 - - siéra - - siéront 
+870 - - siérait - - siéraient 
+871 - - siée - - siéent 
+872 sis sis 
+873 sis 
+874 - - d - - dent 
+875 - - dait - - daient 
+876 di - 
+877 eoirai eoiras eoira eoirons eoirez eoiront 
+878 eoirais eoirais eoirait eoirions eoiriez eoiraient 
+879 ais ais ait aisons aisez aisent 
+880 - - e - - ent 
+881 - - é - - é 
+882 - - eait - - eaient 
+883 - - ea - - èrent 
+884 - - era - - eront 
+885 - - erait - - eraient 
+886 - - eât - - eassent 
