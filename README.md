@@ -1,6 +1,8 @@
 #Analyseur-Prolog
 
-##Analyseur syntaxique et sémantique du français en Prolog
+__Analyseur syntaxique et sémantique du français en Prolog__
+
+_Le dictionnaire utiliser n'est pas sur le dépôt car il faut plus de 100Mo, mais vous le trouverez facilement sur le web sous le nom de dela-fr-public-u8.dic.xml :smiley:_
 
 ###Première partie
 En utilisant l'analyseur morphologique écrit en Prolog dans le cadre du mini-projet précédent, concevez dans un premier temps un analyseur syntaxique du français que vous écrirez sous forme d'une DCG. Voici quelques exemples relativement simples de modèles de phrases que vous devriez pouvoir reconnaître :
@@ -35,3 +37,5 @@ Là aussi la notation tiendra compte du nombre de situations générales et part
 
 ###Troisième partie (épreuve de créativité)
 L'étape ultime de ce mini-projet consiste à imaginer (et implémenter) une petite application utilisant la représentation sémantique des phrases traitées par votre analyseur. L'application est libre, elle doit montrer l'intérêt de construire des représentations sémantiques des phrases. Vous pouvez vous inspirer des applications évoquées en cours, mais également imaginer votre propre application, démontrant ainsi votre grandre créativité ! 
+
+:penguin: :beers: :metal:
