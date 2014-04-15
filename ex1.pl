@@ -20,7 +20,7 @@ adv_ou_non --> adv.
 
 avec_sans_complement --> [].
 avec_sans_complement --> conjc_ou_prep, gNominalComplexe.
-avec_sans_complement --> p_relatif, gVerbal.
+avec_sans_complement --> p_relatif, adv_ou_non, gN_ou_non, gVerbal.
 
 conjc_ou_prep --> conjc.
 conjc_ou_prep --> prep.
