@@ -1,0 +1,14 @@
+?- phrase([elle, mange, du, 'gâteau', avec, les, pieds], []).
+true .
+
+?- phrase([elle, et, moi, jouons, ensemble, alors, que, je, suis, malade], []).
+true .
+
+?- phrase([elle, et, moi, jouons, ensemble], []).
+true .
+
+?- phrase([hier, soudainement, elle, 'est venu'], []).
+true .
+
+?- phrase([je, suis, 'là'], []).
+true .
