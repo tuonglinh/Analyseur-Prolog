@@ -12,6 +12,7 @@ det_ou_non(P) --> det(P).
 
 adj_ou_vide(_) --> [].
 adj_ou_vide(P) --> adj(P).
+adj_ou_vide(P) --> adj(P), adj(P).
 
 gNominalComplexe --> adv_ou_non, gNominalSimple, avec_sans_complement.
 
