@@ -16,8 +16,8 @@ true .
 ?- phrase([la, belle, souris, blanche, qui, 'était', 'très', mignonne], []).
 true .
 
-?- phrase([la, belle, souris, blanche, qui, 'était', 'très', mignonne], []).
+?- phrase([le, grand, chat, bleu, qui, est, 'très', rapide, mange, la, belle, petite, souris, blanche, qui, 'était', pourtant, 'très', mignonne], []).
 true .
 
-?- phrase([le, grand, chat, bleu, qui, est, 'très', rapide, mange, la, belle, petite, souris, blanche, qui, 'était', pourtant, 'très', mignonne], []).
+?- phrase([le, grand, chat, bleu, qui, est, 'très', rapide, et, agile, mange, la, belle, petite, souris, blanche, qui, 'était', pourtant, 'très', mignonne, et, gentille], []).
 true .
