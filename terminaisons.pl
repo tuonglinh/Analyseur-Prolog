@@ -4808,3 +4808,8 @@ terminaison(d996, 's-types', 2).
 terminaison(d997, 's-roses', 2).
 terminaison(d998, '-dépresseur', 1).
 terminaison(d999, 's fonds', 2).
+
+terminaison(r0, '', 1).
+terminaison(r1, '', 2).
+terminaison(r2, '', 3).
+terminaison(r3, '', 4).

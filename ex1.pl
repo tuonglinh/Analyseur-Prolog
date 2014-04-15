@@ -25,7 +25,6 @@ avec_sans_complement --> p_relatif, gVerbal.
 conjc_ou_prep --> conjc.
 conjc_ou_prep --> prep.
 
-gVerbal --> [].
 gVerbal --> pron_refl_ou_non, verbe, adv_ou_non, gN_ou_non.
 
 pron_refl_ou_non --> [].

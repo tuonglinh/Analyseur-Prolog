@@ -13898,3 +13898,13 @@ conjugaison(d996, 'Feminin Singulier', d227, 3, 1, '').
 conjugaison(d997, 'Masculin Pluriel', d667, 2, 0, '').
 conjugaison(d998, 'Feminin Singulier', d668, 3, 1, '').
 conjugaison(d999, 'Feminin Pluriel', d669, 4, 1, '').
+
+conjugaison(r0, 'Masculin Singulier', r0, 1, 0, '').
+conjugaison(r1, 'Masculin Pluriel', r1, 2, 1, '').
+conjugaison(r2, 'Feminin Singulier', r2, 3, 2, '').
+conjugaison(r3, 'Feminin Pluriel', r3, 4, 3, '').
+
+conjugaison(r4, 'Masculin Singulier', r0, 1, 4, '').
+conjugaison(r5, 'Masculin Pluriel', r1, 2, 5, '').
+conjugaison(r6, 'Feminin Singulier', r2, 3, 6, '').
+conjugaison(r7, 'Feminin Pluriel', r3, 4, 7, '').
