@@ -5,7 +5,7 @@ use Encode;
 use utf8;
 
 open IN,"<dela-fr-public-u8.dic.xml" or die $!;
-open OUT,">mots.pl" or die $!;
+open OUT,">mots.prolog" or die $!;
 
 my $doc = "";
 while (<IN>)
@@ -60,8 +60,6 @@ foreach my $entry (@doct)
 				$personne = "2" if ($genre_et_nombre eq 'masculine plural');
 				$personne = "3" if ($genre_et_nombre eq 'feminine singular');
 				$personne = "4" if ($genre_et_nombre eq 'feminine plural');
-			} else {
-				print STDOUT "$derivation : $genre and $nombre\n";
 			}
 		} else {
 			$personne = $personne + 3 if ($nombre eq "plural");
@@ -74,7 +72,7 @@ foreach my $entry (@doct)
 my @t  = keys %h_mots;
 my @tt = sort @t;
 while (@tt) {
-	print OUT shift @tt;
+	print OUT encode("utf8",shift @tt);
 }
 
 close IN;
