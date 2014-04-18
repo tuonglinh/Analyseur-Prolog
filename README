@@ -28,3 +28,4 @@ Cependant comme nous ne traitons pas la concordance des temps dans le projet cel
 Il est à noté qu'on aurait pu garder cette information en repartant des verbes du TP4 et les mettre sous la forme:
 	$groupe_grammatical ($dérivation, $personne, $mot_cannonique, $temps).
 Pour nous économiser du temps nous ne l'avons pas fait, mais cela aurait été tout à fait possible.
+
