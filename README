@@ -1,0 +1,19 @@
+Projet TALN
+Analyseur syntaxique et sémantique du français en Prolog
+
+HIVERT Kevin && TOURNIER Jonathan
+
+Nous deux versions du projet (pour la première partie, les 2 suivantes ont été réalisé grâce à la seconde version).
+Lors de nos tests nous avons remarqué que l'analyseur était extrêmement lent et nous avons donc voulu le modifié 
+afin de corriger ce problème, nous avons remarqué qu'il était possible de faire beaucoup moins de tests sur les 
+mots si nous les stockions d'un tout autre façons:
+
+	- Dans la version 1 les mots sont stockés en 3 fichiers, comme pour le TP précédent donc et lorque l'on
+	vérifie le groupe grammatical d'un mot cela prend donc beaucoup de temps.
+
+	- Dans la version 2, nous avons donc modifié ceci et stocké les mots de cette manière :
+		$groupe_grammatical ($dérivation, $personne, $mot_cannonique, $temps).
+
+	Ceci permet de ne faire que peu de test sur chaque mot et donc gagner un temps non négligeable, ceci au prix
+	de l'expace de stockage puisque pour la V1 le nombre de clauses était de 274.958, pour la V2 ce nombre passe
+	à 857.330 soit 3 fois plus.
