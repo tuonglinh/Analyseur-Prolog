@@ -17,3 +17,14 @@ mots si nous les stockions d'un tout autre façons:
 	Ceci permet de ne faire que peu de test sur chaque mot et donc gagner un temps non négligeable, ceci au prix
 	de l'expace de stockage puisque pour la V1 le nombre de clauses était de 274.958, pour la V2 ce nombre passe
 	à 857.330 soit 3 fois plus.
+
+Pour les 2 versions les parsers utilisent le dictionnaire :
+	http://infolingu.univ-mlv.fr/DonneesLinguistiques/Dictionnaires/telechargement.html
+
+Pour la première version nous avons également utilisé les verbes du TP4 de Kevin, la seconde version récupère les verbes dans
+le dico ceci au prix qu'on ne connait plus le temps exact auquel correspond le verbe conjugé on ne connait plus que le mode.
+Cependant comme nous ne traitons pas la concordance des temps dans le projet cela n'est pas génant.
+
+Il est à noté qu'on aurait pu garder cette information en repartant des verbes du TP4 et les mettre sous la forme:
+	$groupe_grammatical ($dérivation, $personne, $mot_cannonique, $temps).
+Pour nous économiser du temps nous ne l'avons pas fait, mais cela aurait été tout à fait possible.
