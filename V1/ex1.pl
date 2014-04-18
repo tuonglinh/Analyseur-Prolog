@@ -2,7 +2,7 @@
 
 gNominalSimple --> [].
 gNominalSimple --> pron_pers.
-gNominalSimple --> det_ou_non(P), adj_ou_vide(P), nom_ou_pas(P), adj_ou_vide(P).
+gNominalSimple --> det_ou_non(P), adjs_ou_vide(P), nom_ou_pas(P), adj_ou_vide(P).
 
 nom_ou_pas(_) --> [].
 nom_ou_pas(P) --> nom(P).
@@ -12,7 +12,10 @@ det_ou_non(P) --> det(P).
 
 adj_ou_vide(_) --> [].
 adj_ou_vide(P) --> adj(P).
-adj_ou_vide(P) --> adj(P), adj(P).
+
+adjs_ou_vide(_) --> [].
+adjs_ou_vide(P) --> adj_ou_vide(P).
+adjs_ou_vide(P) --> adj(P), adj(P).
 
 gNominalComplexe --> adv_ou_non, gNominalSimple, avec_sans_complement.
 
@@ -21,7 +24,7 @@ adv_ou_non --> adv.
 
 avec_sans_complement --> [].
 avec_sans_complement --> conjc_ou_prep, gNominalComplexe.
-avec_sans_complement --> p_relatif, adv_ou_non, gN_ou_non, gVerbal.
+avec_sans_complement --> p_relatif, phrase.
 
 conjc_ou_prep --> conjc.
 conjc_ou_prep --> prep.
