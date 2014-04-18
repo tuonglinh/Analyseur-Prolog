@@ -1,0 +1,81 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Encode;
+use utf8;
+
+open IN,"<dela-fr-public-u8.dic.xml" or die $!;
+open OUT,">mots.pl" or die $!;
+
+my $doc = "";
+while (<IN>)
+{
+	chomp $_;
+	$doc .= decode("utf8","$_");
+}
+
+my @doct = split /<\/entry>/,$doc;
+
+my %h_mots = ();
+foreach my $entry (@doct)
+{
+	my @t = split /<\/lemma>/,$entry;
+	next unless ($#t == 1);
+
+	# $t[0] contient le mot en fin de ligne.
+	# $t[1] contient le type du mot, et les formes dérivées.
+	my $mot = $1 if ($t[0] =~ m#<lemma>([^ '\d\\]+)$#);
+	next unless $mot;
+	# Si il y a un simple-quote dans le mot ou un chiffre ou un espace, on ne le référence pas.
+	$mot =~ s/\\//;
+
+	my $type;
+	$type = $1 if ($t[1] =~ m#<pos name='([^ ']+)'/>#);
+	next unless $type;
+	next unless ($type eq "noun" || $type eq "adj" || $type eq "adverb"
+		|| $type eq "conjc" || $type eq "det" || $type eq "pronoun" || $type eq "verb");
+	# On ne garde que les adjectifs, les noms, les adverbes et les conjonctions de coordinations, les déterminants, les pronoms.
+	
+	my @inflecteds = split /<\/inflected>/,$entry;
+
+	foreach my $inflected (@inflecteds) {
+
+		my $derivation = $1 if ($inflected =~ m/<form>([^<]+)<\/form>/);
+		$derivation    =~ s/\\//;
+		
+		my $genre    = "";
+		my $nombre   = "";
+		my $tense    = "";
+		my $personne = 0;
+
+		$personne = $1 if ($inflected =~ m/<feat name='person' value='([^ ']+)'\/>/);
+		$genre    = $1 if ($inflected =~ m/<feat name='gender' value='([^ ']+)'\/>/);
+		$nombre   = $1 if ($inflected =~ m/<feat name='number' value='([^ ']+)'\/>/);
+		$tense    = $1 if ($inflected =~ m/<feat name='tense' value='([^ ']+)'\/>/);
+
+		unless ($personne) {
+			if ($genre ne "" and $nombre ne "") {
+				my $genre_et_nombre = "$genre $nombre";
+				$personne = "1";
+				$personne = "2" if ($genre_et_nombre eq 'masculine plural');
+				$personne = "3" if ($genre_et_nombre eq 'feminine singular');
+				$personne = "4" if ($genre_et_nombre eq 'feminine plural');
+			} else {
+				print STDOUT "$derivation : $genre and $nombre\n";
+			}
+		} else {
+			$personne = $personne + 3 if ($nombre eq "plural");
+		}
+
+		$h_mots{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1;
+	}
+}
+
+my @t  = keys %h_mots;
+my @tt = sort @t;
+while (@tt) {
+	print OUT shift @tt;
+}
+
+close IN;
+close OUT;
