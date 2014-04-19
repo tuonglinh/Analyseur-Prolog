@@ -50,7 +50,7 @@ prep --> [X], {prep(X, _, _, _)}.
 p_relatif --> [X], {p_relatif(X, Personne, _, _)}.
 pron_pers --> [X], {pron_pers(X, Personne, _, _)}.
 pron_refl --> [X], {pron_refl(X, Personne, _, _)}.
-adv --> [X], {adv(X, _, _, _)}.
+adv --> [X], {adverb(X, _, _, _)}.
 
 
 phrase --> adv_ou_non, gNominalComplexe, gVerbal_ou_non.
