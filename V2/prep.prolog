@@ -1,7 +1,7 @@
 prep('avec', 0, 'avec', '').
 prep('sur', 0, 'sur', '').
 prep('sous', 0, 'sous', '').
-prep('entre', 0, 'entre', '')., '').
+prep('entre', 0, 'entre', '').
 prep('devant', 0, 'devant', '').
 prep('derrière', 0, 'derrière', '').
 prep('dans', 0, 'dans', '').

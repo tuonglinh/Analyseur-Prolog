@@ -90,7 +90,7 @@ pron_pers('nous', 4, 'nous', '').
 pron_pers('vous', 4, 'vous', '').
 pron_pers('elles', 4, 'elles', '').
 
-# A faire .
+/* A faire */
 
 pron_refl('me', 0, 'me', '').
 pron_refl('me', 2, 'me', '').
