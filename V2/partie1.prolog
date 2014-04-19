@@ -1,4 +1,11 @@
-:- consult('mots.prolog').
+:- consult('adj.prolog').
+:- consult('adverb.prolog').
+:- consult('conjc.prolog').
+:- consult('det.prolog').
+:- consult('noun.prolog').
+:- consult('prep.prolog').
+:- consult('pronoun.prolog').
+:- consult('verb.prolog').
 
 gNominalSimple --> [].
 gNominalSimple --> pron_pers.

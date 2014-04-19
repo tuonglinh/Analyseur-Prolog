@@ -5,7 +5,13 @@ use Encode;
 use utf8;
 
 open IN,"<dela-fr-public-u8.dic.xml" or die $!;
-open OUT,">mots.prolog" or die $!;
+open NOUN,">noun.prolog" or die $!;
+open ADJ,">adj.prolog" or die $!;
+open ADV,">adverb.prolog" or die $!;
+open CONJC,">conjc.prolog" or die $!;
+open DET,">det.prolog" or die $!;
+open PRONOUN,">pronoun.prolog" or die $!;
+open VERB,">verb.prolog" or die $!;
 
 my $doc = "";
 while (<IN>)
@@ -16,7 +22,14 @@ while (<IN>)
 
 my @doct = split /<\/entry>/,$doc;
 
-my %h_mots = ();
+my %h_noun    = ();
+my %h_adj     = ();
+my %h_adv     = ();
+my %h_conjc   = ();
+my %h_det     = ();
+my %h_pronoun = ();
+my %h_verb    = ();
+
 foreach my $entry (@doct)
 {
 	my @t = split /<\/lemma>/,$entry;
@@ -65,15 +78,63 @@ foreach my $entry (@doct)
 			$personne = $personne + 3 if ($nombre eq "plural");
 		}
 
-		$h_mots{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1;
+		$h_noun{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "noun");
+		$h_adj{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "adj");
+		$h_adv{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "adverb");
+		$h_conjc{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "conjc");
+		$h_det{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "det");
+		$h_pronoun{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "pronoun");
+		$h_verb{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "verb");
 	}
 }
 
-my @t  = keys %h_mots;
+my @t  = keys %h_noun;
 my @tt = sort @t;
 while (@tt) {
-	print OUT encode("utf8",shift @tt);
+	print NOUN encode("utf8",shift @tt);
+}
+
+@t  = keys %h_adj;
+@tt = sort @t;
+while (@tt) {
+	print ADJ encode("utf8",shift @tt);
+}
+
+@t  = keys %h_adv;
+@tt = sort @t;
+while (@tt) {
+	print ADV encode("utf8",shift @tt);
+}
+
+@t  = keys %h_conjc;
+@tt = sort @t;
+while (@tt) {
+	print CONJC encode("utf8",shift @tt);
+}
+
+@t  = keys %h_det;
+@tt = sort @t;
+while (@tt) {
+	print DET encode("utf8",shift @tt);
+}
+
+@t  = keys %h_pronoun;
+@tt = sort @t;
+while (@tt) {
+	print PRONOUN encode("utf8",shift @tt);
+}
+
+@t  = keys %h_verb;
+@tt = sort @t;
+while (@tt) {
+	print VERB encode("utf8",shift @tt);
 }
 
 close IN;
-close OUT;
+close NOUN;
+close ADJ;
+close ADV;
+close CONJC;
+close DET;
+close PRONOUN;
+close VERB;
