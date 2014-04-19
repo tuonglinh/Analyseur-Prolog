@@ -66,7 +66,7 @@ foreach my $entry (@doct)
 		$nombre   = $1 if ($inflected =~ m/<feat name='number' value='([^ ']+)'\/>/);
 		$tense    = $1 if ($inflected =~ m/<feat name='tense' value='([^ ']+)'\/>/);
 
-		unless ($personne) {
+		if ($type ne "verb") {
 			if ($genre ne "" and $nombre ne "") {
 				my $genre_et_nombre = "$genre $nombre";
 				$personne = "1";
@@ -76,6 +76,15 @@ foreach my $entry (@doct)
 			}
 		} else {
 			$personne = $personne + 3 if ($nombre eq "plural");
+			if ($personne eq "0") {
+				if ($genre ne "" and $nombre ne "") {
+					my $genre_et_nombre = "$genre $nombre";
+					$personne = "1";
+					$personne = "2" if ($genre_et_nombre eq 'masculine plural');
+					$personne = "3" if ($genre_et_nombre eq 'feminine singular');
+					$personne = "4" if ($genre_et_nombre eq 'feminine plural');
+				}
+			}
 		}
 
 		$h_noun{"$type('$derivation', '$personne', '$mot', '$tense').\n"} = 1 if ($type eq "noun");
