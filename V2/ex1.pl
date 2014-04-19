@@ -23,27 +23,25 @@ phrase(sentence(Gn, Gv)) --> gn_ou_non(Gn), gv(Gv).
 
 
 /* Groupe nominal */
-gn(groupe_nominale(Det, Adj, Adj2, Nom, Compl)) --> dete(Det, Personne), adje_ou_non(Adj, Personne), nom(Nom, Personne), adje_ou_non(Adj2, Personne), complement_ou_non(Compl).
+gn(groupe_nominale(Det, Adj, Conjc, Adj2, Nom, Adj3, Conjc2, Adj4)) --> dete(Det, Personne), adje_ou_non(Adj, Conjc, Adj2, Personne), nom(Nom, Personne), adje_ou_non(Adj3, Conjc2, Adj4, Personne).
 
 
 /* Groupe verbal */
 gv(groupe_verbal(Verb, Gn)) --> verbe(Verb, _, _, _), gn_ou_non(Gn).
-gv(groupe_verbal(Aux, Pps, Gn)) --> aux(Aux, _, _, _), pp(Pps, _, _, _), gn(Gn).
-gv(groupe_verbal(Verb, Inf, Gn)) --> verbe(Verb, _, _, _), verbe(Inf, _, _, inf), gn(Gn).
+gv(groupe_verbal(Aux, Adv, Pps, Gn)) --> aux(Aux, _, _, _), adv_ou_non(Adv), pp(Pps, _, _, _), gn_ou_non(Gn).
+gv(groupe_verbal(Verb, Adv, Inf, Gn)) --> verbe(Verb, _, _, _), adv_ou_non(Adv), verbe(Inf, _, _, inf), gn_ou_non(Gn).
 
 /* Les dérivés */
-gn_ou_non(_) --> [].
 gn_ou_non(Gn) --> gn(Gn).
+gn_ou_non(_) --> [].
 
-/*adjes_ou_non(Adj, Personne) --> adje_ou_non(Adj, Personne).*/
-/*adjes_ou_non(Adj, Adj2, Personne) --> adje(Adj, Personne), adje(Adj2, Personne).*/
+adje_ou_non(_, _, _, _) --> [].
+adje_ou_non(Adj, _, _, Personne) --> adje(Adj, Personne).
+adje_ou_non(Adj, Conjc, Adj2, Personne) --> adje(Adj, Personne), conjC(Conjc), adje(Adj2, Personne).
 
-adje_ou_non(_, _) --> [].
-adje_ou_non(Adj, Personne) --> adje(Adj, Personne).
 
-complement_ou_non(_) --> [].
-complement_ou_non(ConjcPrep, Gn) --> conjc_prep(ConjcPrep), gn(Gn).
-complement_ou_non(Prl, Phrase) --> p_relatif(Prl), phrase(Phrase).
+adv_ou_non(_) --> [].
+adv_ou_non(Adv) --> adve(Adv).
 
 conjc_prep(Conjc) --> conjC(Conjc).
 conjc_prep(Prep) --> prepo(Prep).
