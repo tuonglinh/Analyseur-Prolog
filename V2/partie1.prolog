@@ -29,21 +29,21 @@ negation2(adverbe(pas), Oui_ou_Non) --> [pas].
 
 
 /* Grammaire */
-phrase(sentence(Gn, Gv)) --> gn_ou_non(Gn), gv(Gv).
+phrase(sentence(Gn, Gv)) --> gn_ou_non(Gn, PersonneGn), gv(Gv, PersonneGv), {personne(PersonneGn, PersonneGv)}.
 
 
 /* Groupe nominal */
-gn(groupe_nominale(Det, Adj, Conjc, Adj2, Nom, Adj3, Conjc2, Adj4)) --> dete(Det, Personne), adje_ou_non(Adj, Conjc, Adj2, Personne), nom(Nom, Personne), adje_ou_non(Adj3, Conjc2, Adj4, Personne).
-gn(groupe_nominale(Pp)) --> pronPers(Pp, Personne).
+gn(groupe_nominale(Det, Adj, Conjc, Adj2, Nom, Adj3, Conjc2, Adj4), Personne) --> dete(Det, Personne), adje_ou_non(Adj, Conjc, Adj2, Personne), nom(Nom, Personne), adje_ou_non(Adj3, Conjc2, Adj4, Personne).
+gn(groupe_nominale(Pp), Personne) --> pronPers(Pp, Personne).
 
 /* Groupe verbal */
-gv(groupe_verbal(Neg1, Prfl, Verb, Neg2, Adv, Gn)) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), verbe(Verb, _, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), gn_ou_non(Gn).
-gv(groupe_verbal(Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn)) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), aux(Aux, _, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), pp(Pps, _, _, _), gn_ou_non(Gn).
-gv(groupe_verbal(Neg1, Prfl, Verb, Neg2, Adv, Inf, Gn)) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), verbe(Verb, _, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), verbe(Inf, _, _, inf), gn_ou_non(Gn).
+gv(groupe_verbal(Neg1, Prfl, Verb, Neg2, Adv, Gn), Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), verbe(Verb, Personne, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), gn_ou_non(Gn, PersGn).
+gv(groupe_verbal(Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn), Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), aux(Aux, Personne, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), pp(Pps, Personne, _, _), gn_ou_non(Gn, PersGn).
+gv(groupe_verbal(Neg1, Prfl, Verb, Neg2, Adv, Inf, Gn), Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non), pron_refl_ou_non(Prfl), verbe(Verb, Personne, _, _), negation2_ou_pas(Neg2, Oui_ou_Non), adv_ou_non(Adv), verbe(Inf, _, _, inf), gn_ou_non(Gn, PersGn).
 
 /* Les dérivés */
-gn_ou_non(Gn) --> gn(Gn).
-gn_ou_non(_) --> [].
+gn_ou_non(Gn, Personne) --> gn(Gn, Personne).
+gn_ou_non(_, _) --> [].
 
 adje_ou_non(_, _, _, _) --> [].
 adje_ou_non(Adj, _, _, Personne) --> adje(Adj, Personne).
@@ -64,3 +64,48 @@ negation1_ou_pas(Adv, X) --> negation1(Adv, X).
 
 negation2_ou_pas(_, _) --> [].
 negation2_ou_pas(Adv, X) --> negation2(Adv, X).
+
+/* Gestion du nombre */
+personne(PersGn, PersGv) :-
+	(PersGn = '1'
+		-> (PersGv = '1'
+			-> !
+		; (PersGv = '2'
+			-> PersGv is 1,
+		   		!
+			; (PersGv = '3'
+				-> PersGv is 1,
+		   			!
+				; nl)))
+	; (PersGn = '3'
+		-> (PersGv = '1'
+			-> PersGv is 3,
+		   		!
+			; (PersGv = '2'
+		  		-> PersGv is 3,
+		   			!
+				; (PersGv = '3'
+		   			-> !
+					; nl)))
+		; (PersGn = '2'
+			-> (PersGv = '4'
+				-> PersGv is 2,
+		   			!
+				; (PersGv = '5'
+		  			-> PersGv is 2,
+		   				!
+					; (PersGv = '6'
+		   				-> PersGv is 2,
+		   					!
+						; nl)))
+			; (PersGn = '4'
+				-> (PersGv = '4'
+					-> !
+					; (PersGv = '5'
+		  				-> PersGv is 4,
+		   					!
+						; (PersGv = '6'
+		   					-> PersGv is 4,
+		   						!
+							; nl)))
+				; !)))).
