@@ -91,7 +91,7 @@ pron_pers('vous', 4, 'vous', '').
 pron_pers('elles', 4, 'elles', '').
 
 /* A faire */
-/* Me suis rendu compte que la personne et ben osef */
+/* Me suis rendu compte que la personne et ben osef */	
 pron_refl('me', 1, 'me', '').
 /*pron_refl('me', 2, 'me', '').*/
 pron_refl('me', 4, 'm', '').
