@@ -7,6 +7,7 @@
 :- consult('prep.prolog').
 :- consult('pronoun.prolog').
 :- consult('verb.prolog').
+:- consult('fait_maison.prolog').
 
 /* Récupération des données pour la grammaire */
 dete('déterminant'(X), Personne) --> [X], {det(X, Personne, _, _)}.
@@ -77,35 +78,18 @@ complement_ou_non(Compl, Personne) --> propRelative(Compl, Personne).
 
 
 /* Gestion du nombre */
-personne(PersGn, PersGv) :-
-	(PersGn = '1'
-		-> (PersGv = '3'
-			-> PersGv is 1,
-				!
-			; nl)
-	;(PersGn = '3'
-		-> (PersGv = '3'
-		   	-> !
-			; nl)
-		; (PersGn = '2'
-			-> (PersGv = '4'
-				-> PersGv is 2,
-		   			!
-				; (PersGv = '5'
-		  			-> PersGv is 2,
-		   				!
-					; (PersGv = '6'
-		   				-> PersGv is 2,
-		   					!
-						; nl)))
-			; (PersGn = '4'
-				-> (PersGv = '4'
-					-> !
-					; (PersGv = '5'
-		  				-> PersGv is 4,
-		   					!
-						; (PersGv = '6'
-		   					-> PersGv is 4,
-		   						!
-							; nl)))
-				; !)))).
+personne('1','1').
+personne('1','2').
+personne('1','3').
+
+personne('3','1').
+personne('3','2').
+personne('3','3').
+
+personne('2','4').
+personne('2','5').
+personne('2','6').
+
+personne('4','4').
+personne('4','5').
+personne('4','6').
