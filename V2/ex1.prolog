@@ -102,22 +102,20 @@ negation2_ou_pas(Adv, X) --> negation2(Adv, X).
 
 /* Fonctions annexes */
 /* Phrase */
-verif_phrase(phrase(Adv, Gn, Gv), Adv, Gn, Gv).
-verif_phrase(phrase(Adv, Gn), Adv, Gn, []) :- Adv \== [], Adv \== [].
-verif_phrase(phrase(Adv, Gv), Adv, [], Gv) :- Adv \== [], Gv \== [].
-verif_phrase(phrase(Gn, Gv), [], Gn, Gv) :- Gn \== [], Gv \== [].
 verif_phrase(phrase(Adv), Adv, [], []) :- Adv \== [].
 verif_phrase(phrase(Gn), [], Gn, []) :- Gn \== [].
 verif_phrase(phrase(Gv), [], [], Gv) :- Gv \== [].
-verif_phrase(phrase(), [], [], []).
+verif_phrase(phrase(Adv, Gn), Adv, Gn, []) :- Adv \== [], Gn \== [].
+verif_phrase(phrase(Adv, Gv), Adv, [], Gv) :- Adv \== [], Gv \== [].
+verif_phrase(phrase(Gn, Gv), [], Gn, Gv) :- Gn \== [], Gv \== [].
+verif_phrase(phrase(Adv, Gn, Gv), Adv, Gn, Gv) :- Adv \== [], Gn \== [], Gv \== [].
+
 
 /* Groupe nominal complexe*/
-verif_GNC(gNComplexe(Adv, Gn, Compl, X), Adv, Gn, Compl, X) :- Adv \== [], Gn \== [], Compl \== [], X \== [].
-
-verif_GNC(gNComplexe(Adv, Gn, Compl), Adv, Gn, Compl, []) :- Adv \== [], Gn \== [], Compl \== [].
-verif_GNC(gNComplexe(Adv, Gn, X), Adv, Gn, [], X) :- Adv \== [], Gn \== [], X \== [].
-verif_GNC(gNComplexe(Adv, Compl, X), Adv, [], Compl, X) :- Adv \== [], Compl \== [], X \== [].
-verif_GNC(gNComplexe(Gn, Compl, X), [], Gn, Compl, X) :- Gn \== [], Compl \== [], X \== [].
+verif_GNC(gNComplexe(X), [], [], [], X) :- X \== [].
+verif_GNC(gNComplexe(Compl), [], [], Compl, []) :- Compl \== [].
+verif_GNC(gNComplexe(Gn), [], Gn, [], []) :- Gn \== [].
+verif_GNC(gNComplexe(Adv), Adv, [], [], []) :- Adv \== [].
 
 verif_GNC(gNComplexe(Adv, Gn), Adv, Gn, [], []) :- Adv \== [], Gn \== [].
 verif_GNC(gNComplexe(Adv, Compl), Adv, [], Compl, []) :- Adv \== [], Compl \== [].
@@ -126,9 +124,9 @@ verif_GNC(gNComplexe(Adv, X), Adv, [], [], X) :- Adv \== [], X \== [].
 verif_GNC(gNComplexe(Gn, X), [], Gn, [], X) :- Gn \== [], X \== [].
 verif_GNC(gNComplexe(Compl, X), [], [], Compl, X) :- Compl \== [], X \== [].
 
-verif_GNC(gNComplexe(X), [], [], [], X) :- X \== [].
-verif_GNC(gNComplexe(Compl), [], [], Compl, []) :- Compl \== [].
-verif_GNC(gNComplexe(Gn), [], Gn, [], []) :- Gn \== [].
-verif_GNC(gNComplexe(Adv), Adv, [], [], []) :- Adv \== [].
+verif_GNC(gNComplexe(Adv, Gn, Compl), Adv, Gn, Compl, []) :- Adv \== [], Gn \== [], Compl \== [].
+verif_GNC(gNComplexe(Adv, Gn, X), Adv, Gn, [], X) :- Adv \== [], Gn \== [], X \== [].
+verif_GNC(gNComplexe(Adv, Compl, X), Adv, [], Compl, X) :- Adv \== [], Compl \== [], X \== [].
+verif_GNC(gNComplexe(Gn, Compl, X), [], Gn, Compl, X) :- Gn \== [], Compl \== [], X \== [].
 
-verif_GNC(gNComplexe(), [], [], [], []).
+verif_GNC(gNComplexe(Adv, Gn, Compl, X), Adv, Gn, Compl, X) :- Adv \== [], Gn \== [], Compl \== [], X \== [].
