@@ -31,31 +31,37 @@ negation2(adverbe(pas), Oui_ou_Non) --> [pas].
 
 
 /* Grammaire */
-phrase(X) --> adv_ou_non(Adv), gNominalComplexe(Gn, PersGn), gVerbal_ou_non(Gv, PersGv), {verif_phrase(X, Adv, Gn, Gv)}.
+phrase(X) --> adv_ou_non(Adv),
+			gNominalComplexe(Gn, PersGn),
+			gVerbal_ou_non(Gv, PersGv),
+			{verif_phrase(X, Adv, Gn, Gv)}.
 
 gNominalComplexe(GNC, Personne) --> adv_ou_non(Adv),
 									gNominalSimple(Gn, Personne),
 									avec_sans_complement(Compl, X, Personne),
 									{verif_GNC(GNC, Adv, Gn, Compl, X)}.
 
-gVerbal(groupe_verbal(Pr, Verb, Adv, Gn), Personne) --> pron_refl_ou_non(Pr), verbe(Verb, _, _, _),
+gVerbal(GV1, Personne) --> pron_refl_ou_non(Pr), verbe(Verb, _, _, _),
 														adv_ou_non(Adv),
-														gN_ou_non(Gn, Personne2).
+														gN_ou_non(Gn, Personne2),
+														{verif_GV1(GV1, Pr, Verb, Adv, Gn)}.
 
-gVerbal(groupe_verbal(Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn), Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
-																		pron_refl_ou_non(Prfl),
-																		aux(Aux, Personne, _, _),
-																		negation2_ou_pas(Neg2, Oui_ou_Non),
-																		adv_ou_non(Adv), pp(Pps, Personne, _, _),
-																		gn_ou_non(Gn, PersGn).
+gVerbal(GV2, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
+						pron_refl_ou_non(Prfl),
+						aux(Aux, Personne, _, _),
+						negation2_ou_pas(Neg2, Oui_ou_Non),
+						adv_ou_non(Adv), pp(Pps, Personne, _, _),
+						gn_ou_non(Gn, PersGn),
+						{verif_GV2(GV2, Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn)}.
 
-gVerbal(groupe_verbal(Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn), Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
-																		pron_refl_ou_non(Prfl),
-																		verbe(Verb, Personne, _, _),
-																		adv_ou_non(Adv),
-																		negation2_ou_pas(Neg2, Oui_ou_Non),
-																		verbe(Inf, _, _, inf),
-																		gn_ou_non(Gn, PersGn).
+gVerbal(GV3, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
+						pron_refl_ou_non(Prfl),
+						verbe(Verb, Personne, _, _),
+						adv_ou_non(Adv),
+						negation2_ou_pas(Neg2, Oui_ou_Non),
+						verbe(Inf, _, _, inf),
+						gn_ou_non(Gn, PersGn),
+						{verif_GV3(GV3, Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn)}.
 
 gNominalSimple(_, _) --> [].
 gNominalSimple(groupe_nominal_simple(Pps), Personne) --> pronPers(Pps, Personne).
@@ -102,6 +108,7 @@ negation2_ou_pas(Adv, X) --> negation2(Adv, X).
 
 /* Fonctions annexes */
 /* Phrase */
+verif_phrase(phrase, [], [], []).
 verif_phrase(phrase(Adv), Adv, [], []) :- Adv \== [].
 verif_phrase(phrase(Gn), [], Gn, []) :- Gn \== [].
 verif_phrase(phrase(Gv), [], [], Gv) :- Gv \== [].
@@ -112,6 +119,8 @@ verif_phrase(phrase(Adv, Gn, Gv), Adv, Gn, Gv) :- Adv \== [], Gn \== [], Gv \== 
 
 
 /* Groupe nominal complexe*/
+verif_GNC([], [], [], [], []).
+
 verif_GNC(gNComplexe(X), [], [], [], X) :- X \== [].
 verif_GNC(gNComplexe(Compl), [], [], Compl, []) :- Compl \== [].
 verif_GNC(gNComplexe(Gn), [], Gn, [], []) :- Gn \== [].
@@ -130,3 +139,350 @@ verif_GNC(gNComplexe(Adv, Compl, X), Adv, [], Compl, X) :- Adv \== [], Compl \==
 verif_GNC(gNComplexe(Gn, Compl, X), [], Gn, Compl, X) :- Gn \== [], Compl \== [], X \== [].
 
 verif_GNC(gNComplexe(Adv, Gn, Compl, X), Adv, Gn, Compl, X) :- Adv \== [], Gn \== [], Compl \== [], X \== [].
+
+/* Groupe Verbal 1 */
+verif_GV1(groupe_verbal(Verb), [], Verb, [], []).
+
+verif_GV1(groupe_verbal(Pr, Verb), Pr, Verb, [], []) :- Pr \= [].
+verif_GV1(groupe_verbal(Verb, Adv), [], Verb, Adv, []) :- Adv \== [].
+verif_GV1(groupe_verbal(Verb, Gn), [], Verb, [], Gn) :- Gn \== [].
+
+verif_GV1(groupe_verbal(Pr, Verb, Adv), Pr, Verb, Adv, []) :- Pr \= [], Adv \== [].
+verif_GV1(groupe_verbal(Pr, Verb, Gn), Pr, Verb, [], Gn) :- Pr \= [], Gn \== [].
+verif_GV1(groupe_verbal(Verb, Adv, Gn), [], Verb, Adv, Gn) :- Adv \== [], Gn \== [].
+
+verif_GV1(groupe_verbal(Pr, Verb, Adv, Gn), Pr, Verb, Adv, Gn) :- Pr \= [], Adv \== [], Gn \== [].
+
+/* Groupe verbal 2 */
+verif_GV2(groupe_verbal(Pps), [], [], [], [], [], Pps, []).
+
+/* 1 */
+verif_GV2(groupe_verbal(Neg1, Pps), [], [], [], [], [], Pps, []) :- Neg1 \== [].
+verif_GV2(groupe_verbal(Prfl, Pps), [], Prfl, [], [], [], Pps, []) :- Prfl \== [].
+verif_GV2(groupe_verbal(Aux, Pps), [], [], Aux, [], [], Pps, []) :- Aux \== [].
+verif_GV2(groupe_verbal(Neg2, Pps), [], [], [], Neg2, [], Pps, []) :- Neg2 \== [].
+verif_GV2(groupe_verbal(Adv, Pps), [], [], [], [], Adv, Pps, []) :- Adv \== [].
+verif_GV2(groupe_verbal(Pps, Gn), [], [], [], [], [], Pps, Gn) :- Gn \== [].
+
+/* 2 */
+verif_GV2(groupe_verbal(Neg1, Prfl, Pps), Neg1, Prfl, [], [], [], Pps, []) :- Neg1 \== [],
+																			Prfl \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Pps), Neg1, [], Aux, [], [], Pps, []) :- Neg1 \== [],
+																			Aux \== [].
+verif_GV2(groupe_verbal(Neg1, Neg2, Pps), Neg1, [], [], Neg2, [], Pps, []) :- Neg1 \== [],
+																			Neg2 \== [].
+verif_GV2(groupe_verbal(Neg1, Adv, Pps), Neg1, [], [], [], Adv, Pps, []) :- Neg1 \== [],
+																			Adv \== [].
+verif_GV2(groupe_verbal(Neg1, Pps, Gn), Neg1, [], [], [], [], Pps, Gn) :- Neg1 \== [],
+																		Gn \== [].
+
+verif_GV2(groupe_verbal(Prfl, Aux, Pps), [], Prfl, Aux, [], [], Pps, []) :- Prfl \== [],
+																			Aux \== [].
+verif_GV2(groupe_verbal(Prfl, Neg2, Pps), [], Prfl, [], Neg2, [], Pps, []) :- Prfl \== [],
+																			Neg2 \== [].
+verif_GV2(groupe_verbal(Prfl, Adv, Pps), [], Prfl, [], [], Adv, Pps, []) :- Prfl \== [],
+																			Adv \== [].
+verif_GV2(groupe_verbal(Prfl, Pps, Gn), [], Prfl, [], [], [], Pps, Gn) :- Prfl \== [],
+																		Gn \== [].
+
+verif_GV2(groupe_verbal(Aux, Neg2, Pps), [], [], Aux, Neg2, [], Pps, []) :- Aux \== [],
+																			Neg2 \== [].
+verif_GV2(groupe_verbal(Aux, Adv, Pps), [], [], Aux, [], Adv, Pps, []) :- Aux \== [],
+																		Adv \== [].
+verif_GV2(groupe_verbal(Aux, Pps, Gn), [], [], Aux, [], [], Pps, Gn) :- Aux \== [],
+																		Gn \== [].
+
+verif_GV2(groupe_verbal(Neg2, Adv, Pps), [], [], [], Neg2, Adv, Pps, []) :- Neg2 \== [],
+																			Adv \== [].
+verif_GV2(groupe_verbal(Neg2, Pps, Gn), [], [], [], Neg2, [], Pps, Gn) :- Neg2 \== [],
+																		Gn \== [].
+
+verif_GV2(groupe_verbal(Adv, Pps, Gn), [], [], [], [], Adv, Pps, Gn) :- Adv \== [],
+																		Gn \== [].
+
+/* 3 */
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Pps), Neg1, Prfl, Aux, [], [], Pps, []) :- Neg1 \== [],
+																					Prfl \== [],
+																					Aux \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Neg2, Pps), Neg1, Prfl, [], Neg2, [], Pps, []) :- Neg1 \== [],
+																					Prfl \== [],
+																					Neg2 \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Adv, Pps), Neg1, Prfl, [], [], Adv, Pps, []) :- Neg1 \== [],
+																					Prfl \== [],
+																					Adv \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Pps, Gn), Neg1, Prfl, [], [], [], Pps, Gn) :- Neg1 \== [],
+																				Prfl \== [],
+																				Gn \== [].
+
+verif_GV2(groupe_verbal(Neg1, Aux, Neg2, Pps), Neg1, [], Aux, Neg2, [], Pps, []) :- Neg1 \== [],
+																					Aux \== [],
+																					Neg2 \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Adv, Pps), Neg1, [], Aux, [], Adv, Pps, []) :- Neg1 \== [],
+																				Aux \== [],
+																				Adv \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Pps, Gn), Neg1, [], Aux, [], [], Pps, Gn) :- Neg1 \== [],
+																				Aux \== [],
+																				Gn \== [].
+
+verif_GV2(groupe_verbal(Neg1, Neg2, Adv, Pps), Neg1, [], [], Neg2, Adv, Pps, []) :- Neg1 \== [],
+																					Neg2 \== [],
+																					Adv \== [].
+verif_GV2(groupe_verbal(Neg1, Neg2, Pps, Gn), Neg1, [], [], Neg2, [], Pps, Gn) :- Neg1 \== [],
+																				Neg2 \== [],
+																				Gn \== [].
+
+verif_GV2(groupe_verbal(Neg1, Adv, Pps, Gn), Neg1, [], [], [], Adv, Pps, Gn) :- Neg1 \== [],
+																				Adv \== [],
+																				Gn \== [].
+
+
+verif_GV2(groupe_verbal(Prfl, Aux, Neg2, Pps), [], Prfl, Aux, Neg2, [], Pps, []) :- Prfl \== [],
+																					Aux \== [],
+																					Neg2 \== [].
+verif_GV2(groupe_verbal(Prfl, Aux, Adv, Pps), [], Prfl, Aux, [], Adv, Pps, []) :- Prfl \== [],
+																				Aux \== [],
+																				Adv \== [].
+verif_GV2(groupe_verbal(Prfl, Aux, Pps, Gn), [], Prfl, Aux, [], [], Pps, Gn) :- Prfl \== [],
+																				Aux \== [],
+																				Gn \== [].
+
+verif_GV2(groupe_verbal(Prfl, Neg2, Adv, Pps), [], Prfl, [], Neg2, Adv, Pps, []) :- Prfl \== [],
+																					Neg2 \== [],
+																					Adv \== [].
+verif_GV2(groupe_verbal(Prfl, Neg2, Pps, Gn), [], Prfl, [], Neg2, [], Pps, Gn) :- Prfl \== [],
+																				Neg2 \== [],
+																				Gn \== [].
+
+verif_GV2(groupe_verbal(Prfl, Adv, Pps, Gn), [], Prfl, [], [], Adv, Pps, Gn) :- Prfl \== [],
+																				Adv \== [],
+																				Gn \== [].
+
+
+verif_GV2(groupe_verbal(Aux, Neg2, Adv, Pps), [], [], Aux, Neg2, Adv, Pps, []) :- Aux \== [],
+																				Neg2 \== [],
+																				Adv \== [].
+verif_GV2(groupe_verbal(Aux, Neg2, Pps, Gn), [], [], Aux, Neg2, [], Pps, Gn) :- Aux \== [],
+																				Neg2 \== [],
+																				Gn \== [].
+
+
+verif_GV2(groupe_verbal(Aux, Adv, Pps, Gn), [], [], Aux, [], Adv, Pps, Gn) :- Aux \== [],
+																			Adv \== [],
+																			Gn \== [].
+
+
+verif_GV2(groupe_verbal(Neg2, Adv, Pps, Gn), [], [], [], Neg2, Adv, Pps, Gn) :- Neg2 \== [],
+																				Adv \== [],
+																				Gn \== [].
+
+/* 4 */
+verif_GV2(groupe_verbal(Aux, Neg2, Adv, Pps, Gn), [], [], Aux, Neg2, Adv, Pps, Gn) :- Aux \== [],
+																					Neg2 \== [],
+																					Adv \== [],
+																					Gn \== [].
+verif_GV2(groupe_verbal(Prfl, Neg2, Adv, Pps, Gn), [], Prfl, [], Neg2, Adv, Pps, Gn) :- Prfl \== [],
+																					Neg2 \== [],
+																					Adv \== [],
+																					Gn \== [].
+verif_GV2(groupe_verbal(Prfl, Aux, Adv, Pps, Gn), [], Prfl, Aux, [], Adv, Pps, Gn) :- Prfl \== [],
+																					Aux \== [],
+																					Adv \== [],
+																					Gn \== [].
+verif_GV2(groupe_verbal(Prfl, Aux, Neg2, Pps, Gn), [], Prfl, Aux, Neg2, [], Pps, Gn) :- Prfl \== [],
+																						Aux \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Prfl, Aux, Neg2, Adv, Pps), [], Prfl, Aux, Neg2, Adv, Pps, []) :- Prfl \== [],
+																						Aux \== [],
+																						Neg2 \== [],
+																						Adv \== [].
+
+
+verif_GV2(groupe_verbal(Neg1, Neg2, Adv, Pps, Gn), Neg1, [], [], Neg2, Adv, Pps, Gn) :- Neg1 \== [],
+																						Neg2 \== [],
+																						Adv \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Adv, Pps, Gn), Neg1, [], Aux, [], Adv, Pps, Gn) :- Neg1 \== [],
+																					Aux \== [],
+																					Adv \== [],
+																					Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Neg2, Pps, Gn), Neg1, [], Aux, Neg2, [], Pps, Gn) :- Neg1 \== [],
+																						Aux \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Neg2, Adv, Pps), Neg1, [], Aux, Neg2, Adv, Pps, []) :- Neg1 \== [],
+																						Aux \== [],
+																						Neg2 \== [],
+																						Adv \== [].
+
+
+verif_GV2(groupe_verbal(Neg1, Prfl, Adv, Pps, Gn), Neg1, Prfl, [], [], Adv, Pps, Gn) :- Neg1 \== [],
+																						Prfl \== [],
+																						Adv \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Neg2, Pps, Gn), Neg1, Prfl, [], Neg2, [], Pps, Gn) :- Neg1 \== [],
+																						Prfl \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Neg2, Adv, Pps), Neg1, Prfl, [], Neg2, Adv, Pps, []) :- Neg1 \== [],
+																							Prfl \== [],
+																							Neg2 \== [],
+																							Adv \== [].
+
+
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Pps, Gn), Neg1, Prfl, Aux, [], [], Pps, Gn) :- Neg1 \== [],
+																						Prfl \== [],
+																						Aux \== [],
+																						Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Adv, Pps), Neg1, Prfl, Aux, [], Adv, Pps, []) :- Neg1 \== [],
+																						Prfl \== [],
+																						Aux \== [],
+																						Adv \== [].
+
+
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Neg2, Pps), Neg1, Prfl, Aux, Neg2, [], Pps, []) :- Neg1 \== [],
+																							Prfl \== [],
+																							Aux \== [],
+																							Neg2 \== [].
+
+/* 5 */
+verif_GV2(groupe_verbal(Prfl, Aux, Neg2, Adv, Pps, Gn), [], Prfl, Aux, Neg2, Adv, Pps, Gn) :- Prfl \== [],
+																							Aux \== [],
+																							Neg2 \== [],
+																							Adv \== [],
+																							Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Aux, Neg2, Adv, Pps, Gn), Neg1, [], Aux, Neg2, Adv, Pps, Gn) :- Neg1 \== [],
+																							Aux \== [],
+																							Neg2 \== [],
+																							Adv \== [],
+																							Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Neg2, Adv, Pps, Gn), Neg1, Prfl, [], Neg2, Adv, Pps, Gn) :- Neg1 \== [],
+																								Prfl \== [],
+																								Neg2 \== [],
+																								Adv \== [],
+																								Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Adv, Pps, Gn), Neg1, Prfl, Aux, [], Adv, Pps, Gn) :- Neg1 \== [],
+																							Prfl \== [],
+																							Aux \== [],
+																							Adv \== [],
+																							Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Neg2, Pps, Gn), Neg1, Prfl, Aux, Neg2, [], Pps, Gn) :- Neg1 \== [],
+																								Prfl \== [],
+																								Aux \== [],
+																								Neg2 \== [],
+																								Gn \== [].
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Neg2, Adv, Pps), Neg1, Prfl, Aux, Neg2, Adv, Pps, []) :- Neg1 \== [],
+																								Prfl \== [],
+																								Aux \== [],
+																								Neg2 \== [],
+																								Adv \== [].
+
+/* 6 */
+verif_GV2(groupe_verbal(Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn), Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn) :- Neg1 \== [],
+																									Prfl \== [],
+																									Aux \== [],
+																									Neg2 \== [],
+																									Adv \== [],
+																									Gn \== [].
+
+
+/* Groupe verbal 3 */
+verif_GV3(groupe_verbal(Verb, Inf), [], [], Verb, [], [], Inf, []).
+
+/* 1 */
+verif_GV3(groupe_verbal(Neg1, Verb, Inf), Neg1, [], Verb, [], [], Inf, []) :- Neg1 \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Inf), [], Prfl, Verb, [], [], Inf, []) :- Prfl \== [].
+verif_GV3(groupe_verbal(Verb, Adv, Inf), [], [], Verb, Adv, [], Inf, []) :- Adv \== [].
+verif_GV3(groupe_verbal(Verb, Neg2, Inf), [], [], Verb, [], Neg2, Inf, []) :- Neg2 \== [].
+verif_GV3(groupe_verbal(Verb, Inf, Gn), [], [], Verb, [], [], Inf, Gn) :- Gn \== [].
+
+/* 2 */
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Inf), Neg1, Prfl, Verb, [], [], Inf, []) :- Neg1 \== [],
+																					Prfl \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Adv, Inf), Neg1, [], Verb, Adv, [], Inf, []) :- Neg1 \== [],
+																					Adv \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Neg2, Inf), Neg1, [], Verb, [], Neg2, Inf, []) :- Neg1 \== [],
+																					Neg2 \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Inf, Gn), Neg1, [], Verb, [], [], Inf, Gn) :- Neg1 \== [],
+																				Gn \== [].
+
+verif_GV3(groupe_verbal(Prfl, Verb, Adv, Inf), [], Prfl, Verb, Adv, [], Inf, []) :- Prfl \== [],
+																					Adv \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Neg2, Inf), [], Prfl, Verb, [], Neg2, Inf, []) :- Prfl \== [],
+																					Neg2 \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Inf, Gn), [], Prfl, Verb, [], [], Inf, Gn) :- Prfl \== [],
+																				Gn \== [].
+
+verif_GV3(groupe_verbal(Verb, Adv, Neg2, Inf), [], [], Verb, Adv, Neg2, Inf, []) :- Adv \== [],
+																					Neg2 \== [].
+verif_GV3(groupe_verbal(Verb, Adv, Inf, Gn), [], [], Verb, Adv, [], Inf, Gn) :- Adv \== [],
+																				Gn \== [].
+
+verif_GV3(groupe_verbal(Verb, Neg2, Inf, Gn), [], [], Verb, [], Neg2, Inf, Gn) :- Neg2 \== [],
+																				Gn \== [].
+
+/* 3 */
+verif_GV3(groupe_verbal(Verb, Adv, Neg2, Inf, Gn), [], [], Verb, Adv, Neg2, Inf, Gn) :- Adv \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Neg2, Inf, Gn), [], Prfl, Verb, [], Neg2, Inf, Gn) :- Prfl \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Adv, Inf, Gn), [], Prfl, Verb, Adv, [], Inf, Gn) :- Prfl \== [],
+																						Adv \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Prfl, Verb, Adv, Neg2, Inf), [], Prfl, Verb, Adv, Neg2, Inf, []) :- Prfl \== [],
+																						Adv \== [],
+																						Neg2 \== [].
+
+verif_GV3(groupe_verbal(Neg1, Verb, Neg2, Inf, Gn), Neg1, [], Verb, [], Neg2, Inf, Gn) :- Neg1 \== [],
+																						Neg2 \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Adv, Inf, Gn), Neg1, [], Verb, Adv, [], Inf, Gn) :- Neg1 \== [],
+																						Adv \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Adv, Neg2, Inf), Neg1, [], Verb, Adv, Neg2, Inf, []) :- Neg1 \== [],
+																						Adv \== [],
+																						Neg2 \== [].
+
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Inf, Gn), Neg1, Prfl, Verb, [], [], Inf, Gn) :- Neg1 \== [],
+																						Prfl \== [],
+																						Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Neg2, Inf), Neg1, Prfl, Verb, [], Neg2, Inf, []) :- Neg1 \== [],
+																						Prfl \== [],
+																						Neg2 \== [].
+
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Adv, Inf), Neg1, Prfl, Verb, Adv, [], Inf, []) :- Neg1 \== [],
+																						Prfl \== [],
+																						Adv \== [].
+
+/* 4 */
+verif_GV3(groupe_verbal(Prfl, Verb, Adv, Neg2, Inf, Gn), [], Prfl, Verb, Adv, Neg2, Inf, Gn) :- Prfl \== [],
+																								Adv \== [],
+																								Neg2 \== [],
+																								Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Verb, Adv, Neg2, Inf, Gn), Neg1, [], Verb, Adv, Neg2, Inf, Gn) :- Neg1 \== [],
+																								Adv \== [],
+																								Neg2 \== [],
+																								Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Neg2, Inf, Gn), Neg1, Prfl, Verb, [], Neg2, Inf, Gn) :- Neg1 \== [],
+																								Prfl \== [],
+																								Neg2 \== [],
+																								Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Adv, Inf, Gn), Neg1, Prfl, Verb, Adv, [], Inf, Gn) :- Neg1 \== [],
+																								Prfl \== [],
+																								Adv \== [],
+																								Gn \== [].
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Adv, Neg2, Inf), Neg1, Prfl, Verb, Adv, Neg2, Inf, []) :- Neg1 \== [],
+																										Prfl \== [],
+																										Adv \== [],
+																										Neg2 \== [].
+
+/* 5 */
+verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn), Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn) :- Neg1 \== [],
+																										Prfl \== [],
+																										Adv \== [],
+																										Neg2 \== [],
+																										Gn \== [].
+																										
+
