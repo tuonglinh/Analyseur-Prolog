@@ -66,6 +66,8 @@ foreach my $entry (@doct)
 		$nombre   = $1 if ($inflected =~ m/<feat name='number' value='([^ ']+)'\/>/);
 		$tense    = $1 if ($inflected =~ m/<feat name='tense' value='([^ ']+)'\/>/);
 
+		print "$derivation : $personne $genre $nombre - " if ($tense eq "ppast");
+
 		if ($type ne "verb") {
 			if ($genre ne "" and $nombre ne "") {
 				my $genre_et_nombre = "$genre $nombre";
@@ -75,14 +77,16 @@ foreach my $entry (@doct)
 				$personne = "4" if ($genre_et_nombre eq 'feminine plural');
 			}
 		} else {
-			$personne = $personne + 3 if ($nombre eq "plural");
-			if ($personne eq "0") {
+			$personne = $personne + 3 if ($nombre eq "plural" and $personne ne "0");
+			if ($personne eq "0" or $personne eq "") {
 				if ($genre ne "" and $nombre ne "") {
 					my $genre_et_nombre = "$genre $nombre";
 					$personne = "1";
 					$personne = "2" if ($genre_et_nombre eq 'masculine plural');
 					$personne = "3" if ($genre_et_nombre eq 'feminine singular');
 					$personne = "4" if ($genre_et_nombre eq 'feminine plural');
+
+					print "$derivation : $personne $genre_et_nombre\n" if ($tense eq "ppast");
 				}
 			}
 		}
