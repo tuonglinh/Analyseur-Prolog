@@ -41,10 +41,11 @@ gNominalComplexe(GNC, Personne) --> adv_ou_non(Adv),
 									avec_sans_complement(Compl, X, Personne),
 									{verif_GNC(GNC, Adv, Gn, Compl, X)}.
 
-gVerbal(GV1, Personne) --> pron_refl_ou_non(Pr), verbe(Verb, _, _, _),
-														adv_ou_non(Adv),
-														gN_ou_non(Gn, Personne2),
-														{verif_GV1(GV1, Pr, Verb, Adv, Gn)}.
+gVerbal(GV1, Personne) --> pron_refl_ou_non(Pr),
+						verbe(Verb, _, _, _),
+						adv_ou_non(Adv),
+						gN_ou_non(Gn, Personne2),
+						{verif_GV1(GV1, Pr, Verb, Adv, Gn)}.
 
 gVerbal(GV2, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
 						pron_refl_ou_non(Prfl),
@@ -65,10 +66,11 @@ gVerbal(GV3, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
 
 gNominalSimple(_, _) --> [].
 gNominalSimple(groupe_nominal_simple(Pps), Personne) --> pronPers(Pps, Personne).
-gNominalSimple(groupe_nominal_simple(Det, Adj, Adj2, Nom, Adj3, Adj4), Personne) --> det_ou_non(Det, Personne),
-																					adjs_ou_vide(Adj, Adj2, Personne),
-																					nom_ou_pas(Nom, Personne),
-																					adjs_ou_vide(Adj3, Adj4, Personne).
+gNominalSimple(GNS, Personne) --> det_ou_non(Det, Personne),
+								adjs_ou_vide(Adj, Adj2, Personne),
+								nom_ou_pas(Nom, Personne),
+								adjs_ou_vide(Adj3, Adj4, Personne),
+								{verif_GNS(GNS, Det, Adj, Adj2, Nom, Adj3, Adj4)}.
 
 gN_ou_non(_, _) --> [].
 gN_ou_non(Gn, Personne) --> gNominalComplexe(Gn, Personne).
@@ -486,3 +488,16 @@ verif_GV3(groupe_verbal(Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn), Neg1, Prfl, Verb,
 																										Gn \== [].
 																										
 
+/* Groupe Nomial Simple */
+verif_GNS([], [], [], [], [], [], []).
+
+/* 1 */
+verif_GNS(gNSimple(Det), Det, [], [], [], [], []) :- Det \== [].
+verif_GNS(gNSimple(Adj), [], Ad, [], [], [], []) :- Det \== [].
+
+verif_GNS(gNSimple(Det, Adj, Adj2, Nom, Adj3, Adj4), Det, Adj, Adj2, Nom, Adj3, Adj4) :- Det \== [],
+																						Adj \== [],
+																						Adj2 \== [],
+																						Nom \== [],
+																						Adj3 \== [],
+																						Adj4 \== [].
