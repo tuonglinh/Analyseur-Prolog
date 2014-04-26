@@ -264,3 +264,33 @@ Toto = qui ;
 A = phrase(gNComplexe(gNSimple(déterminant(le), nom(mec)), pronomRelatif(qui), phrase),
 	gV(verb(buvait), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
 
+?- phrase(A, [le, chat, mange, la, souris, et, le, chien, mange, le, poulet], []).
+false.
+
+/* 
+ * Nous avons cherché à reconnaitre ce type de phrase et avons trouvé une solution cependant
+ * celle ci ralentit fortement la résolution de très longue phrase (voir les exemples à ralonge au dessus).
+ *
+ * Dans le fichier ex1.prolog, en décommentant la partie commenté ci dessous :
+ * phrase(X) --> adv_ou_non(Adv),
+ *			gNominalComplexe(Gn, PersGn),
+ *			gVerbal_ou_non(Gv, PersGv),
+ *			/*suite_ou_non(Reste),*/
+ *			{personne(PersGn, PersGv),
+ *			 verif_phrase(X, Adv, Gn, Gv)}.
+ *
+ *	/*suite_ou_non([]) --> [].
+ *	suite_ou_non(Reste) --> conjc_ou_prep(Y), phrase(Z).*/
+ * 
+ * On peut obtenir le resultat de :
+ *		phrase(A, [le, chat, mange, la, souris, et, le, chien, mange, le, poulet], []).
+ *
+ *
+ * ?- phrase(A, [le, chat, mange, la, souris, et, le, chien, mange, le, poulet], []).
+ *	A = phrase(gNComplexe(gNSimple(déterminant(le), nom(chat))), gV(verb(mange), gNComplexe(gNSimple(déterminant(la),
+ *		nom(souris))))) .
+ * 
+ * Seule la première partie de la phrase apparait dans l'arbre cela est du au faire que la variable Reste n'aparaisse
+ * pas dans verif_phrase, mais on voit bien que l'on peut reconnaitre ce type de phrase.
+ *
+  */

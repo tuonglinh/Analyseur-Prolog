@@ -33,12 +33,12 @@ negation2(adverbe(pas), Oui_ou_Non) --> [pas].
 phrase(X) --> adv_ou_non(Adv),
 			gNominalComplexe(Gn, PersGn),
 			gVerbal_ou_non(Gv, PersGv),
+			/*suite_ou_non(Reste),*/
 			{personne(PersGn, PersGv),
 			 verif_phrase(X, Adv, Gn, Gv)}.
 
-/*phrase(phrase(Y, conjonctionCoordination(et), Z)) --> phrase(Y),
-			conjC(conjonctionCoordination(et)),
-			phrase(Z).*/
+/*suite_ou_non([]) --> [].
+suite_ou_non(Reste) --> conjc_ou_prep(Y), phrase(Z).*/
 
 gNominalComplexe(GNC, Personne) --> adv_ou_non(Adv),
 									gNominalSimple(Gn, Personne),
