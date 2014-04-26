@@ -29,3 +29,29 @@ Il est à noté qu'on aurait pu garder cette information en repartant des verbes
 	$groupe_grammatical ($dérivation, $personne, $mot_cannonique, $temps).
 Pour nous économiser du temps nous ne l'avons pas fait, mais cela aurait été tout à fait possible.
 
+----
+
+Le projet est donc découpé en plusieurs fichiers, un pour chaque type de mot, un pour les mots que nous avons ajoutés à la main
+car leurs catégories n'étaient pas assez présices dans le dictionnaire que nous avons parsé, et un pour chaque exercice à 
+réaliser.
+
+La partie 1, vérifie l'accord entre les mots mais pas entre les temps, il est tout à fait possible d'écrire :
+	
+	"Le garçon qui autrefois deviendra grand."
+
+Mais on ne peut pas écrire :
+	
+	"Le lapin mange des petits carottes."
+
+Cette partie permet également de construire l'arbre syntaxique de la phrase si celle si est correcte du point de vue de notre
+grammaire :
+	?- phrase(A, [le, lapin, mange, des, petites, carottes], []).
+	A = phrase(gNComplexe(gNSimple(déterminant(le), noun(lapin))), gV(verb(mange),
+		gNComplexe(gNSimple(déterminant(des), adjectif(petites), noun(carottes))))).
+
+Nous avons fait en sorte que les variables non instancié de PROLOG n'apparaissent pas dans cette arbre, la tâche ne fût pas
+tant compliquée que longue, mais le résultat en vallait la peine :)
+
+Une serie d'exemple est disponible pour cette partie dans le fichier ./Exemple/ex1. Il regroupe des phrase correcte du point
+de vue du francais qui sont effectivement reconnue par notre grammaire, ainsi que des phrases non correctes reconnues et des
+phrases correctes non reconnues.

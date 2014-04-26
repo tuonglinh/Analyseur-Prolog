@@ -1,0 +1,198 @@
+?- phrase(A, [un, exemple, de, phrase, correctement, reconnue], []).
+A = phrase(gNComplexe(gNSimple(déterminant(un), noun(exemple)), préposition(de)), gV(verb(phrase),
+	gNComplexe(gNSimple(adjectif(reconnue))))) ;
+...
+...
+A = phrase(gNComplexe(gNSimple(déterminant(un), noun(exemple)), préposition(de), gNComplexe(gNSimple(noun(phrase)))),
+	gV(adverbe(correctement), participe_passé(reconnue))) .
+
+/*
+ * On peut remarquer que bien que la syntaxe soit correcte du point de vue du français apparaisse, il y a certaine proposition de
+ * syntaxe qui sont fausses, dans la première proposition "phrase" est reconnu comme un verbe ce qui fait que l'on peut écrire par exemple :
+ *
+ *	?- phrase(A, [un, exemple, de, suis, correctement, reconnu], []).
+ *	A = phrase(gNComplexe(gNSimple(déterminant(un), noun(exemple)), préposition(de)), gV(verb(suis),
+ *		gNComplexe(gNSimple(adjectif(reconnu))))).
+ *
+ * Or suis n'étant pas un nom aucune syntaxe proposé ne sera correcte pour cet exemple.
+  */
+
+?- phrase(A, [le, chat, mange, la, souris], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), noun(chat))), gV(verb(mange), gNComplexe(gNSimple(déterminant(la),
+	noun(souris))))) .
+
+?- phrase(A, [le, farouche, crie, farouchement], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(farouche))), gV(verb(crie),
+	gNComplexe(adverbe(farouchement)))) .
+
+?- phrase(A, [le, grand, chat, bleu, mange, la, belle, petite, souris, blanche], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), noun(chat), adjectif(bleu))), gV(verb(mange),
+	gNComplexe(gNSimple(déterminant(la), adjectif(belle), adjectif(petite), noun(souris), adjectif(blanche))))) .
+
+?- phrase(A, [un, grand, aviateur, malin, qui, 'était', 'très', 'doué', volait, rapidement, vers, le, nord], []).
+A = phrase(gNComplexe(gNSimple(déterminant(un), noun(aviateur), adjectif(malin)), pronomRelatif(qui), phrase(gV(verb(était),
+	gNComplexe(gNSimple(adjectif(doué)))))), gV(verb(volait), gNComplexe(préposition(vers), gNComplexe(gNSimple(déterminant(le),
+	adjectif(nord)))))) .
+
+?- phrase(A, [le, lapin, qui, mange, de, belles, grandes, carottes, deviendra, beau, et, fort], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), noun(lapin)), pronomRelatif(qui), phrase(gV(verb(mange),
+	gNComplexe(préposition(de), gNComplexe(gNSimple(adjectif(belles), adjectif(grandes), noun(carottes))))))),
+	gV(verb(deviendra), gNComplexe(gNSimple(adjectif(beau)), conjonctionCoordination(et),
+	gNComplexe(gNSimple(adjectif(fort)))))) .
+
+?- phrase(A, [nous, mangeons, des, 'crêpes'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(nous))), gV(verb(mangeons),
+	gNComplexe(gNSimple(déterminant(des), nom(crêpes))))) .
+
+?- phrase(A, [nous, mangeons, des, 'crêpes', et, buvons, de, la, 'bière'], []).
+A = phrase(phrase(gNComplexe(gNSimple(pronomPersonnel(nous))), gV(verb(mangeons),
+	gNComplexe(gNSimple(déterminant(des), nom(crêpes))))), conjonctionCoordination(et), phrase(gV(verb(buvons),
+	gNComplexe(préposition(de), gNComplexe(gNSimple(déterminant(la), nom(bière))))))) .
+
+?- phrase(A, [le, singe, mange, 'goulûment', de, juteuses,  bananes], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), nom(singe))), gV(verb(mange), gNComplexe(adverbe(goulûment),
+	préposition(de), gNComplexe(gNSimple(adjectif(juteuses), nom(bananes)))))) .
+
+?- phrase(A, [les, bananes, ne, sont, pas, encore, 'mûres'], []).
+A = phrase(gNComplexe(gNSimple(déterminant(les), nom(bananes))), gV(adverbe(ne), verb(sont), adverbe(pas),
+	gNComplexe(adverbe(encore), gNSimple(adjectif(mûres))))) .
+
+?- phrase(A, [le, grand, chat, bleu, mange, la, belle, petit, souris, blanche], []).
+false.
+/*
+ * On vérifie bien l'accord entre les noms et les adjectifs en genre.
+  */
+
+?- phrase(A, [le, grand, chat, bleu, mange, la, belle, petites, souris, blanche], []).
+false.
+/*
+ * Et en nombre.
+  */
+
+?- phrase(A, [le, grand, chat, bleu, mangent, la, belle, petite, souris, blanche], []).
+false.
+/*
+ * Il y a un accord en nombre entre les groupe nominaux et les groupes verbaux.
+  */
+
+?- phrase(A, [le, grand, chat, bleu, manges, la, belle, petite, souris, blanche], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(bleu))), gV(verb(manges),
+	gNComplexe(gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris), adjectif(blanche))))) .
+
+?- phrase(A, [le, grand, chat, bleu, mangeais, la, belle, petite, souris, blanche], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(bleu))), gV(verb(mangeais),
+	gNComplexe(gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris), adjectif(blanche))))) .
+/*
+ * Cependant on ne différencie pas si le groupe nominal est un "je", une "tu", ou un "il".
+  */
+
+?- phrase(A, [les, bananes, ne, sont, pas, encore, 'mûr'], []).
+A = phrase(gNComplexe(gNSimple(déterminant(les), nom(bananes))), gV(adverbe(ne), verb(sont), adverbe(pas),
+	gNComplexe(adverbe(encore), gNSimple(adjectif(mûr))))) .
+/*
+ * Si l'adjectif est après le verbes il n'est pas non plus reconnu.
+  */
+
+?- phrase(A, [le, grand, chat, bleu, ne, mange, pas, 'goulûment', la, belle, petite, souris, blanche], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(bleu))), gV(adverbe(ne),
+	verb(mange), adverbe(pas), gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle),
+	adjectif(petite), nom(souris), adjectif(blanche))))) .
+
+?- phrase(A, [le, grand, chat, bleu, ne, mange, pas, 'goulûment', la, belle, petite, souris, blanche, qui, joue, au, ballon], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(bleu))), gV(adverbe(ne),
+	verb(mange), adverbe(pas), gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle),
+	adjectif(petite), nom(souris), adjectif(blanche)), pronomRelatif(qui), phrase(gV(verb(joue),
+	gNComplexe(préposition(au), gNComplexe(gNSimple(nom(ballon))))))))) .
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, ne, mange, pas, 'goulûment', la, belle, petite, souris, blanche, qui,
+	joue, au, ballon, dans, la, rue, avec, des, oiseaux], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(noir)),
+	conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(blanc)))), gV(adverbe(ne), verb(mange),
+	adverbe(pas), gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle), adjectif(petite),
+	nom(souris), adjectif(blanche)), pronomRelatif(qui), phrase(gV(verb(joue), gNComplexe(préposition(au),
+	gNComplexe(gNSimple(nom(ballon)), préposition(dans), gNComplexe(gNSimple(déterminant(...), nom(...)),
+	préposition(avec), gNComplexe(gNSimple(..., ...)))))))))) .
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, qui, ne, mange, pas, 'goulûment', la, belle, petite, souris, blanche,
+qui, joue, au, ballon, dans, la, rue, avec, des, oiseaux, mange, un, biscuit], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(noir)), conjonctionCoordination(et),
+	gNComplexe(gNSimple(adjectif(blanc)), pronomRelatif(qui), phrase)), gV(adverbe(ne), verb(mange), adverbe(pas),
+	gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris),
+	adjectif(blanche)), pronomRelatif(qui), phrase(gNComplexe(gNSimple(nom(joue)), préposition(au),
+	gNComplexe(gNSimple(nom(ballon)), préposition(dans), gNComplexe(gNSimple(déterminant(la), nom(rue)),
+	préposition(avec), gNComplexe(gNSimple(déterminant(...), nom(...)))))), gV(verb(mange),
+	gNComplexe(gNSimple(déterminant(un), nom(biscuit)))))))) .
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, qui, ne, mange, pas, 'goulûment', la, belle, petite, souris,
+	blanche, qui, joue, au, ballon, dans, la, rue, avec, des, oiseaux, mange, un, biscuit, au, chocolat, avec, ses,
+	amis, chiens, qui, sont, gentils], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(noir)), conjonctionCoordination(et),
+	gNComplexe(gNSimple(adjectif(blanc)), pronomRelatif(qui), phrase)), gV(adverbe(ne), verb(mange), adverbe(pas),
+	gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris),
+	adjectif(blanche)), pronomRelatif(qui), phrase(gNComplexe(gNSimple(nom(joue)), préposition(au),
+	gNComplexe(gNSimple(nom(ballon)), préposition(dans), gNComplexe(gNSimple(déterminant(la), nom(rue)),
+	préposition(avec), gNComplexe(gNSimple(déterminant(...), nom(...)))))), gV(verb(mange),
+	gNComplexe(gNSimple(déterminant(un), nom(biscuit)), préposition(au), gNComplexe(gNSimple(adjectif(chocolat)),
+	préposition(avec), gNComplexe(gNSimple(déterminant(...), adjectif(...), adjectif(...)), pronomRelatif(qui),
+	phrase(gV(..., ...)))))))))) 
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, qui, ne, mange, pas, 'goulûment', la, belle, petite, souris, blanche, qui,
+	joue, au, ballon, dans, la, rue, avec, des, oiseaux, mange, un, biscuit, au, chocolat, avec, ses, amis, chiens, qui,
+	sont, gentils, et, glandouillants], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(noir)),
+	conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(blanc)), pronomRelatif(qui), phrase)),
+	gV(adverbe(ne), verb(mange), adverbe(pas), gNComplexe(adverbe(goulûment), gNSimple(déterminant(la),
+	adjectif(belle), adjectif(petite), nom(souris), adjectif(blanche)), pronomRelatif(qui),
+	phrase(gNComplexe(gNSimple(nom(joue)), préposition(au), gNComplexe(gNSimple(nom(ballon)),
+	préposition(dans), gNComplexe(gNSimple(déterminant(la), nom(rue)), préposition(avec),
+	gNComplexe(gNSimple(déterminant(...), nom(...)))))), gV(verb(mange), gNComplexe(gNSimple(déterminant(un),
+	nom(biscuit)), préposition(au), gNComplexe(gNSimple(adjectif(chocolat)), préposition(avec),
+	gNComplexe(gNSimple(déterminant(...), adjectif(...), adjectif(...)), pronomRelatif(qui), phrase(gV(..., ...)))))))))) .
+
+?- phrase(A, [les, grands, chats, noirs, et, blancs, qui, ne, mangent, pas, 'goulûment', la, belle,
+	petite, souris, blanche, qui, joue, au, ballon, dans, la, rue, avec, des, oiseaux, mange, un, biscuit, au,
+	chocolat, avec, ses, amis, chiens, qui, sont, gentils, et, glandouillants], []).
+A = phrase(gNComplexe(gNSimple(déterminant(les), adjectif(grands), adjectif(chats)), conjonctionCoordination(et),
+	gNComplexe(gNSimple(adjectif(blancs)), pronomRelatif(qui), phrase)), gV(adverbe(ne), verb(mangent), adverbe(pas),
+	gNComplexe(adverbe(goulûment), gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris),
+	adjectif(blanche)), pronomRelatif(qui), phrase(gNComplexe(gNSimple(nom(joue)), préposition(au),
+	gNComplexe(gNSimple(nom(ballon)), préposition(dans), gNComplexe(gNSimple(déterminant(la), nom(rue)), préposition(avec),
+	gNComplexe(gNSimple(déterminant(...), nom(...)))))), gV(verb(mange), gNComplexe(gNSimple(déterminant(un), nom(biscuit)),
+	préposition(au), gNComplexe(gNSimple(adjectif(chocolat)), préposition(avec), gNComplexe(gNSimple(déterminant(...),
+	adjectif(...), adjectif(...)), pronomRelatif(qui), phrase(gV(..., ...)))))))))) .
+/*
+ * Ici on voit que la partie :
+ *		"mange, un, biscuit, au, chocolat, avec, ses, amis, chiens, qui, sont, gentils, et, glandouillants"
+ * qui devrait s'appliquer à : "les, grands, chats, noirs, et, blancs" n'est pas correctement conjugé. 
+  */
+
+?- phrase(A, [le, lapin, mange, des, belles, oranges, mignonnes, grandes, carottes], []).
+false.
+
+/*
+ * On ne peut pas mettre plus de 3 adjectifs d'affilé.
+  */
+
+?- phrase(A, [le, lapin, mange, des, belles, oranges, mignonnes, et, grandes, carottes], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), nom(lapin))), gV(verb(mange),
+	gNComplexe(gNSimple(déterminant(des), adjectif(belles), nom(oranges),
+	adjectif(mignonnes)), conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(grandes),
+	nom(carottes)))))) .
+
+/*
+ * Mais on peut en ajouter grâce à des conjection de coordination.
+  */
+
+?- phrase(A, [le, lapin, mange, des, belles, oranges, mignonnes, et, grandes, poilues, carottes], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), nom(lapin))), gV(verb(mange), gNComplexe(gNSimple(déterminant(des),
+	adjectif(belles), nom(oranges), adjectif(mignonnes)), conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(grandes),
+	adjectif(poilues), nom(carottes)))))) .
+
+/*
+ * Ce ne sonne pas très français, on écrirait plutôt :
+  */
+
+?- phrase(A, [le, lapin, mange, des, belles, oranges, mignonnes, et, grandes, et, poilues, carottes], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), nom(lapin))), gV(verb(mange), gNComplexe(gNSimple(déterminant(des),
+	adjectif(belles), nom(oranges), adjectif(mignonnes)), conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(grandes)),
+	conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(poilues), nom(carottes))))))) .

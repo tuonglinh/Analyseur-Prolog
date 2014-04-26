@@ -12,7 +12,7 @@
 /* Récupération des données pour la grammaire */
 dete('déterminant'(X), Personne) --> [X], {det(X, Personne, _, _)}.
 adje(adjectif(X), Personne) --> [X], {adj(X, Personne, _, _)}.
-nom(noun(X), Personne) --> [X], {noun(X, Personne, _, _)}.
+nom(nom(X), Personne) --> [X], {noun(X, Personne, _, _)}.
 verbe(verb(X), Personne, MotCanonique, Temps) --> [X], {verb(X, Personne, MotCanonique, Temps)}.
 conjC(conjonctionCoordination(X)) --> [X], {conjc(X, _, _, _)}.
 prepo('préposition'(X)) --> [X], {prep(X, _, _, _)}. 
@@ -29,12 +29,16 @@ negation1(adverbe(ne), Oui_ou_Non) --> [ne].
 negation2(adverbe(pas), Oui_ou_Non) --> [pas].
 
 
-
 /* Grammaire */
 phrase(X) --> adv_ou_non(Adv),
 			gNominalComplexe(Gn, PersGn),
 			gVerbal_ou_non(Gv, PersGv),
-			{verif_phrase(X, Adv, Gn, Gv)}.
+			{personne(PersGn, PersGv),
+			 verif_phrase(X, Adv, Gn, Gv)}.
+
+/*phrase(phrase(Y, conjonctionCoordination(et), Z)) --> phrase(Y),
+			conjC(conjonctionCoordination(et)),
+			phrase(Z).*/
 
 gNominalComplexe(GNC, Personne) --> adv_ou_non(Adv),
 									gNominalSimple(Gn, Personne),
@@ -42,18 +46,25 @@ gNominalComplexe(GNC, Personne) --> adv_ou_non(Adv),
 									{verif_GNC(GNC, Adv, Gn, Compl, X)}.
 
 gVerbal(GV1, Personne) --> pron_refl_ou_non(Pr),
-						verbe(Verb, _, _, _),
+						negation1_ou_pas(Neg1, Oui_ou_Non),
+						verbe(Verb, Personne, _, _),
 						adv_ou_non(Adv),
+						negation2_ou_pas(Neg2, Oui_ou_Non),
 						gN_ou_non(Gn, Personne2),
-						{verif_GV1(GV1, Pr, Verb, Adv, Gn)}.
+						{verif_GV1(GV1, Pr, Neg1, Verb, Adv, Neg2, Gn)}.
 
 gVerbal(GV2, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
 						pron_refl_ou_non(Prfl),
 						aux(Aux, Personne, _, _),
 						negation2_ou_pas(Neg2, Oui_ou_Non),
-						adv_ou_non(Adv), pp(Pps, Personne, _, _),
-						gn_ou_non(Gn, PersGn),
+						adv_ou_non(Adv),
+						pp(Pps, Personne, _, _),
+						gN_ou_non(Gn, PersGn),
 						{verif_GV2(GV2, Neg1, Prfl, Aux, Neg2, Adv, Pps, Gn)}.
+
+gVerbal(GV2bis, Personne) --> adv_ou_non(Adv), pp(Pps, Personne, _, _),
+							gN_ou_non(Gn, PersGn),
+							{verif_GV2bis(GV2bis, Adv, Pps, Gn)}.
 
 gVerbal(GV3, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
 						pron_refl_ou_non(Prfl),
@@ -61,14 +72,14 @@ gVerbal(GV3, Personne) --> negation1_ou_pas(Neg1, Oui_ou_Non),
 						adv_ou_non(Adv),
 						negation2_ou_pas(Neg2, Oui_ou_Non),
 						verbe(Inf, _, _, inf),
-						gn_ou_non(Gn, PersGn),
+						gN_ou_non(Gn, PersGn),
 						{verif_GV3(GV3, Neg1, Prfl, Verb, Adv, Neg2, Inf, Gn)}.
 
 gNominalSimple([], _) --> [].
-gNominalSimple(groupe_nominal_simple(Pps), Personne) --> pronPers(Pps, Personne).
-gNominalSimple(GNS, Personne) --> det_ou_non(Det, Personne),
+gNominalSimple(gNSimple(Pps), Personne) --> pronPers(Pps, Personne).
+gNominalSimple(GNS, Personne) --> det_ou_non(Det, Personne, DetOuNon),
 								adjs_ou_vide(Adj, Adj2, Personne),
-								nom_ou_pas(Nom, Personne),
+								nom_ou_pas(Nom, Personne, DetOuNon),
 								adjs_ou_vide(Adj3, Adj4, Personne),
 								{verif_GNS(GNS, Det, Adj, Adj2, Nom, Adj3, Adj4)}.
 
@@ -78,11 +89,11 @@ gN_ou_non(Gn, Personne) --> gNominalComplexe(Gn, Personne).
 gVerbal_ou_non([], _) --> [].
 gVerbal_ou_non(Gv, Personne) --> gVerbal(Gv, Personne).
 
-nom_ou_pas([], _) --> [].
-nom_ou_pas(Nom, Personne) --> nom(Nom, Personne).
+nom_ou_pas([], _, _) --> [].
+nom_ou_pas(Nom, Personne, 1) --> nom(Nom, Personne).
 
-det_ou_non([], _) --> [].
-det_ou_non(Det, Personne) --> dete(Det, Personne).
+det_ou_non([], _, _) --> [].
+det_ou_non(Det, Personne, 1) --> dete(Det, Personne).
 
 adjs_ou_vide([], [], _) --> [].
 adjs_ou_vide(Adj, Adj2, Personne) --> adje(Adj, Personne),
@@ -92,7 +103,7 @@ adv_ou_non([]) --> [].
 adv_ou_non(Adv) --> adve(Adv).
 
 avec_sans_complement([], [], _) --> [].
-avec_sans_complement(Compl, Gn, Personne) --> conjc_ou_prep(Compl), gNominalComplexe(Gn, Personne).
+avec_sans_complement(Compl, Gn, Personne) --> conjc_ou_prep(Compl), gNominalComplexe(Gn, Personne2).
 avec_sans_complement(Prl, Phrase, _) --> pronRelatif(Prl), phrase(Phrase).
 
 conjc_ou_prep(Conjc) --> conjC(Conjc).
@@ -107,6 +118,21 @@ negation1_ou_pas(Adv, X) --> negation1(Adv, X).
 negation2_ou_pas([], _) --> [].
 negation2_ou_pas(Adv, X) --> negation2(Adv, X).
 
+personne('1','1').
+personne('1','2').
+personne('1','3').
+
+personne('3','1').
+personne('3','2').
+personne('3','3').
+
+personne('2','4').
+personne('2','5').
+personne('2','6').
+
+personne('4','4').
+personne('4','5').
+personne('4','6').
 
 /* Fonctions annexes */
 /* Phrase */
@@ -143,17 +169,65 @@ verif_GNC(gNComplexe(Gn, Compl, X), [], Gn, Compl, X) :- Gn \== [], Compl \== []
 verif_GNC(gNComplexe(Adv, Gn, Compl, X), Adv, Gn, Compl, X) :- Adv \== [], Gn \== [], Compl \== [], X \== [].
 
 /* Groupe Verbal 1 */
-verif_GV1(gV(Verb), [], Verb, [], []).
+verif_GV1(gV(Verb), [], [], Verb, [], [], []).
 
-verif_GV1(gV(Pr, Verb), Pr, Verb, [], []) :- Pr \= [].
-verif_GV1(gV(Verb, Adv), [], Verb, Adv, []) :- Adv \== [].
-verif_GV1(gV(Verb, Gn), [], Verb, [], Gn) :- Gn \== [].
 
-verif_GV1(gV(Pr, Verb, Adv), Pr, Verb, Adv, []) :- Pr \= [], Adv \== [].
-verif_GV1(gV(Pr, Verb, Gn), Pr, Verb, [], Gn) :- Pr \= [], Gn \== [].
-verif_GV1(gV(Verb, Adv, Gn), [], Verb, Adv, Gn) :- Adv \== [], Gn \== [].
+verif_GV1(gV(Verb, Gn), [], [], Verb, [], [], Gn) :- Gn \== [].
 
-verif_GV1(gV(Pr, Verb, Adv, Gn), Pr, Verb, Adv, Gn) :- Pr \= [], Adv \== [], Gn \== [].
+verif_GV1(gV(Neg1, Verb, Neg2), [], Neg1, Verb, [], Neg2, []) :- Neg1 \== [],
+																Neg2 \== [].
+
+verif_GV1(gV(Verb, Adv), [], [], Verb, Adv, [], []) :- Adv \== [].
+verif_GV1(gV(Pr, Verb), Pr, [], Verb, [], [], []) :- Pr \== [].
+
+
+verif_GV1(gV(Neg1, Verb, Neg2, Gn), [], Neg1, Verb, [], Neg2, Gn) :- Neg1 \== [],
+																	Neg2 \== [],
+																	Gn \== [].
+
+verif_GV1(gV(Verb, Adv, Gn), [], [], Verb, Adv, [], Gn) :- Adv \== [],
+															Gn \== [].
+verif_GV1(gV(Pr, Verb, Gn), Pr, [], Verb, [], [], Gn) :- Pr \== [],
+														Gn \== [].
+
+verif_GV1(gV(Neg1, Verb, Adv, Neg2), [], Neg1, Verb, Adv, Neg2, []) :- Neg1 \== [],
+																		Adv \== [],
+																		Neg2 \== [].
+verif_GV1(gV(Pr, Neg1, Verb, Neg2), Pr, Neg1, Verb, [], Neg2, []) :- Pr \== [],
+																	Neg1 \== [],
+																	Neg2 \== [].
+verif_GV1(gV(Pr, Verb, Adv), Pr, [], Verb, Adv, [], []) :- Pr \== [],
+															Adv \== [].
+
+
+verif_GV1(gV(Pr, Neg1, Verb, Adv, Neg2), Pr, Neg1, Verb, Adv, Neg2, []) :- Pr \== [],
+																			Neg1 \== [],
+																			Adv \== [],
+																			Neg2 \== [].
+verif_GV1(gV(Pr, Neg1, Verb, Neg2, Gn), Pr, Neg1, Verb, [], Neg2, Gn) :- Pr \== [],
+																		Neg1 \== [],
+																		Neg2 \== [],
+																		Gn \== [].
+verif_GV1(gV(Pr, Verb, Adv, Gn), Pr, [], Verb, Adv, [], Gn) :- Pr \== [],
+																Adv \== [],
+																Gn \== [].
+verif_GV1(gV(Neg1, Verb, Adv, Neg2, Gn), [], Neg1, Verb, Adv, Neg2, Gn) :- Neg1 \== [],
+																			Adv \== [],
+																			Neg2 \== [],
+																			Gn \== [].
+
+
+verif_GV1(gV(Pr, Neg1, Verb, Adv, Neg2, Gn), Pr, Neg1, Verb, Adv, Neg2, Gn) :- Pr \== [],
+																				Neg1 \== [],
+																				Adv \== [],
+																				Neg2 \== [],
+																				Gn \== [].
+
+/* Groupe verbal 2 bis */
+verif_GV2bis(gv(Pps), [], Pps, []).
+verif_GV2bis(gV(Pps, Gn), [], Pps, Gn) :- Gn \== [].
+verif_GV2bis(gV(Adv, Pps), Adv, Pps, []) :- Adv \== [].
+verif_GV2bis(gV(Adv, Pps, Gn), Adv, Pps, Gn) :- Adv \== [], Gn \== [].
 
 /* Groupe verbal 2 */
 verif_GV2(gV(Pps), [], [], [], [], [], Pps, []).
