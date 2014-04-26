@@ -110,7 +110,7 @@ conjc_ou_prep(Conjc) --> conjC(Conjc).
 conjc_ou_prep(Prepo) --> prepo(Prepo).
 
 pron_refl_ou_non([]) --> [].
-pron_refl_ou_non(Prfl) --> pronRefl(prfl).
+pron_refl_ou_non(Prfl) --> pronRefl(Prfl).
 
 negation1_ou_pas([], _) --> [].
 negation1_ou_pas(Adv, X) --> negation1(Adv, X).

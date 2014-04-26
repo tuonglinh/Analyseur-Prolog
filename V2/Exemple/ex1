@@ -82,8 +82,25 @@ A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adj
 ?- phrase(A, [le, grand, chat, bleu, mangeais, la, belle, petite, souris, blanche], []).
 A = phrase(gNComplexe(gNSimple(déterminant(le), adjectif(grand), nom(chat), adjectif(bleu))), gV(verb(mangeais),
 	gNComplexe(gNSimple(déterminant(la), adjectif(belle), adjectif(petite), nom(souris), adjectif(blanche))))) .
+
+?- phrase(A, [je, buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(verb(buvais), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
+
+?- phrase(A, [tu, buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(tu))), gV(verb(buvais), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
+
+?- phrase(A, [il, buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(il))), gV(verb(buvais), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
+
 /*
  * Cependant on ne différencie pas si le groupe nominal est un "je", une "tu", ou un "il".
+  */
+
+?- phrase(A, [nous, buvais, une, 'bière'], []).
+A = phrase(gV(pronomReflechi(nous), verb(buvais), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
+
+/*
+ * Et il y'a une erreur, on autorise le pronom réfléchi seul.
   */
 
 ?- phrase(A, [les, bananes, ne, sont, pas, encore, 'mûr'], []).
@@ -196,3 +213,54 @@ A = phrase(gNComplexe(gNSimple(déterminant(le), nom(lapin))), gV(verb(mange), g
 A = phrase(gNComplexe(gNSimple(déterminant(le), nom(lapin))), gV(verb(mange), gNComplexe(gNSimple(déterminant(des),
 	adjectif(belles), nom(oranges), adjectif(mignonnes)), conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(grandes)),
 	conjonctionCoordination(et), gNComplexe(gNSimple(adjectif(poilues), nom(carottes))))))) .
+
+/* */
+
+?- phrase(A, [je, la, regardons, danser], []).
+false.
+
+?- phrase(A, [je, la, regarde, danser], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(pronomReflechi(la), verb(regarde), verb(danser))) .
+
+?- phrase(A, [je, te, regarde, danser], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(pronomReflechi(te), verb(regarde), verb(danser))) .
+
+?- phrase(A, [je, te,  buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(pronomReflechi(te), verb(buvais), gNComplexe(gNSimple(déterminant(une),
+	nom(bière))))) .
+
+?- phrase(A, [je, t,  buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(pronomReflechi(t), verb(buvais), gNComplexe(gNSimple(déterminant(une),
+	nom(bière))))) .
+
+?- phrase(A, [je, se,  buvais, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je))), gV(pronomReflechi(se), verb(buvais), gNComplexe(gNSimple(déterminant(une),
+	nom(bière))))) .
+
+/*
+ * On reconnais bien certaines phrases avec des pronoms réfléchis, cependant certaines phrase reconnues sont un peu bizarres... ^^
+ *
+ * En remplacant le pronom réfléchi par la variable Toto, on obtient bien tout les pronoms réfléchis mais aussi certaines choses
+ * du genre :
+  */
+?- phrase(A, [je, Toto,  buvais, une, 'bière'], []).
+...
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je)), conjonctionCoordination(donc)), gV(verb(buvais),
+	gNComplexe(gNSimple(déterminant(une), nom(bière))))),
+Toto = donc ;
+...
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je)), pronomRelatif(laquelle), phrase(gV(verb(buvais),
+	gNComplexe(gNSimple(déterminant(une), nom(bière))))))),
+Toto = laquelle ;
+...
+A = phrase(gNComplexe(gNSimple(pronomPersonnel(je)), pronomRelatif(qui), phrase(gV(verb(buvais),
+	gNComplexe(gNSimple(déterminant(une), nom(bière))))))),
+Toto = qui ;
+
+/*
+ *  On autorise c'est erreur pour pouvoir accepter d'autres phrase comme.
+  */
+ ?- phrase(A, [le, mec, qui, buvait, une, 'bière'], []).
+A = phrase(gNComplexe(gNSimple(déterminant(le), nom(mec)), pronomRelatif(qui), phrase),
+	gV(verb(buvait), gNComplexe(gNSimple(déterminant(une), nom(bière))))) .
+
