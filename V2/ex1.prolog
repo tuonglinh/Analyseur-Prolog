@@ -493,8 +493,225 @@ verif_GNS([], [], [], [], [], [], []).
 
 /* 1 */
 verif_GNS(gNSimple(Det), Det, [], [], [], [], []) :- Det \== [].
-verif_GNS(gNSimple(Adj), [], Ad, [], [], [], []) :- Det \== [].
+verif_GNS(gNSimple(Adj), [], Adj, [], [], [], []) :- Adj \== [].
+verif_GNS(gNSimple(Adj2), [], [], Adj2, [], [], []) :- Adj2 \== [].
+verif_GNS(gNSimple(Nom), [], [], [], Nom, [], []) :- Nom \== [].
+verif_GNS(gNSimple(Adj3), [], [], [], [], Adj3, []) :- Adj3 \== [].
+verif_GNS(gNSimple(Adj4), [], [], [], [], [], Adj4) :- Adj4 \== [].
 
+/* 2 */
+verif_GNS(gNSimple(Det, Adj), Det, Adj, [], [], [], []) :- Det \== [],
+															Adj \== [].
+verif_GNS(gNSimple(Det, Adj2), Det, [], Adj2, [], [], []) :- Det \== [],
+															Adj2 \== [].
+verif_GNS(gNSimple(Det, Nom), Det, [], [], Nom, [], []) :- Det \== [],
+															Nom \== [].
+verif_GNS(gNSimple(Det, Adj3), Det, [], [], [], Adj3, []) :- Det \== [],
+															Adj3 \== [].
+verif_GNS(gNSimple(Det, Adj4), Det, [], [], [], [], Adj4) :- Det \== [],
+															Adj4 \== [].
+
+verif_GNS(gNSimple(Adj, Adj2), [], Adj, Adj2, [], [], []) :- Adj \== [],
+															Adj2 \== [].
+verif_GNS(gNSimple(Adj, Nom), [], Adj, [], Nom, [], []) :- Adj \== [],
+															Nom \== [].
+verif_GNS(gNSimple(Adj, Adj3), [], Adj, [], [], Adj3, []) :- Adj \== [],
+															Adj3 \== [].
+verif_GNS(gNSimple(Adj, Adj4), [], Adj, [], [], [], Adj4) :- Adj \== [],
+															Adj4 \== [].
+
+verif_GNS(gNSimple(Adj2, Nom), [], [], Adj2, Nom, [], []) :- Adj2 \== [],
+															Nom \== [].
+verif_GNS(gNSimple(Adj2, Adj3), [], [], Adj2, [], Adj3, []) :- Adj2 \== [],
+																Adj3 \== [].
+verif_GNS(gNSimple(Adj2, Adj4), [], [], Adj2, [], [], Adj4) :- Adj2 \== [],
+																Adj4 \== [].
+
+verif_GNS(gNSimple(Nom, Adj3), [], [], [], Nom, Adj3, []) :- Nom \== [],
+															Adj3 \== [].
+verif_GNS(gNSimple(Nom, Adj4), [], [], [], Nom, [], Adj4) :- Nom \== [],
+															Adj4 \== [].
+
+verif_GNS(gNSimple(Adj3, Adj4), [], [], [], [], Adj3, Adj4) :- Adj3 \== [],
+																Adj4 \== [].
+
+
+/* 3 */
+verif_GNS(gNSimple(Nom, Adj3, Adj4), [], [], [], Nom, Adj3, Adj4) :- Nom \== [],
+																	Adj3 \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Adj2, Adj3, Adj4), [], [], Adj2, [], Adj3, Adj4) :- Adj2 \== [],
+																		Adj3 \== [],
+																		Adj4 \== [].
+verif_GNS(gNSimple(Adj2, Nom, Adj4), [], [], Adj2, Nom, [], Adj4) :- Adj2 \== [],
+																	Nom \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Adj2, Nom, Adj3), [], [], Adj2, Nom, Adj3, []) :- Adj2 \== [],
+																	Nom \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Adj, Adj3, Adj4), [], Adj, [], [], Adj3, Adj4) :- Adj \== [],
+																	Adj3 \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Adj, Nom, Adj4), [], Adj, [], Nom, [], Adj4) :- Adj \== [],
+																	Nom \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Adj, Nom, Adj3), [], Adj, [], Nom, Adj3, []) :- Adj \== [],
+																	Nom \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Adj, Adj2, Adj4), [], Adj, Adj2, [], [], Adj4) :- Adj \== [],
+																	Adj2 \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Adj, Adj2, Adj3), [], Adj, Adj2, [], Adj3, []) :- Adj \== [],
+																	Adj2 \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Adj, Adj2, Nom), [], Adj, Adj2, Nom, [], []) :- Adj \== [],
+																	Adj2 \== [],
+																	Nom \== [].
+
+
+
+verif_GNS(gNSimple(Det, Adj3, Adj4), Det, [], [], [], Adj3, Adj4) :- Det \== [],
+																	Adj3 \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Det, Nom, Adj4), Det, [], [], Nom, [],] Adj4) :- Det \== [],
+																	Nom \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Det, Nom, Adj3), Det, [], [], Nom, Adj3, []) :- Det \== [],
+																	Nom \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj2, Adj4), Det, [], Adj2, [], [], Adj4) :- Det \== [],
+																	Adj2 \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj2, Adj3), Det, [], Adj2, [], Adj3, []) :- Det \== [],
+																	Adj2 \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj2, Nom), Det, [], Adj2, Nom, [], []) :- Det \== [],
+																			Adj2 \== [],
+																			Nom \== [].
+
+
+verif_GNS(gNSimple(Det, Adj, Adj4), Det, Adj, [], [], [], Adj4) :- Det \== [],
+																	Adj \== [],
+																	Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Adj3), Det, Adj, [], [], Adj3, []) :- Det \== [],
+																	Adj \== [],
+																	Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj, Nom), Det, Adj, [], Nom, [], []) :- Det \== [],
+																Adj \== [],
+																Nom \== [].
+
+
+verif_GNS(gNSimple(Det, Adj, Adj2), Det, Adj, Adj2, [], [], []) :- Det \== [],
+																	Adj \== [],
+																	Adj2 \== [].
+
+
+/* 4 */
+verif_GNS(gNSimple(Adj2, Nom, Adj3, Adj4), [], [], Adj2, Nom, Adj3, Adj4) :- Adj2 \== [],
+																			Nom \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Adj, Nom, Adj3, Adj4), [], Adj, [], Nom, Adj3, Adj4) :- Adj \== [],
+																			Nom \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Adj, Adj2, Adj3, Adj4), [], Adj, Adj2, [], Adj3, Adj4) :- Adj \== [],
+																			Adj2 \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Adj, Adj2, Nom, Adj4), [], Adj, Adj2, Nom, [], Adj4) :- Adj \== [],
+																			Adj2 \== [],
+																			Nom \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Adj, Adj2, Nom, Adj3), [], Adj, Adj2, Nom, Adj3, []) :- Adj \== [],
+																			Adj2 \== [],
+																			Nom \== [],
+																			Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Nom, Adj3, Adj4), Det, [], [], Nom, Adj3, Adj4) :- Det \== [],
+																			Nom \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj2, Adj3, Adj4), Det, [], Adj2, [], Adj3, Adj4) :- Det \== [],
+																			Adj2 \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj2, Nom, Adj4), Det, [], Adj2, Nom, [], Adj4) :- Det \== [],
+																			Adj2 \== [],
+																			Nom \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj2, Nom, Adj3), Det, [], Adj2, Nom, Adj3, []) :- Det \== [],
+																			Adj2 \== [],
+																			Nom \== [],
+																			Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj, Adj3, Adj4), Det, Adj, [], [], Adj3, Adj4) :- Det \== [],
+																			Adj \== [],
+																			Adj3 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Nom, Adj4), Det, Adj, [], Nom, [], Adj4) :- Det \== [],
+																		Adj \== [],
+																		Nom \== [],
+																		Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Nom, Adj3), Det, Adj, [], Nom, Adj3, []) :- Det \== [],
+																		Adj \== [],
+																		Nom \== [],
+																		Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj, Adj2, Adj4), Det, Adj, Adj2, [], [], Adj4) :- Det \== [],
+																			Adj \== [],
+																			Adj2 \== [],
+																			Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Adj2, Adj3), Det, Adj, Adj2, [], Adj3, []) :- Det \== [],
+																			Adj \== [],
+																			Adj2 \== [],
+																			Adj3 \== [].
+
+verif_GNS(gNSimple(Det, Adj, Adj2, Nom), Det, Adj, Adj2, Nom, [], []) :- Det \== [],
+																		Adj \== [],
+																		Adj2 \== [],
+																		Nom \== [].
+
+
+/* 5 */
+verif_GNS(gNSimple(Adj, Adj2, Nom, Adj3, Adj4), [], Adj, Adj2, Nom, Adj3, Adj4) :- Adj \== [],
+																					Adj2 \== [],
+																					Nom \== [],
+																					Adj3 \== [],
+																					Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj2, Nom, Adj3, Adj4), Det, [], Adj2, Nom, Adj3, Adj4) :- Det \== [],
+																					Adj2 \== [],
+																					Nom \== [],
+																					Adj3 \== [],
+																					Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Nom, Adj3, Adj4), Det, Adj, [], Nom, Adj3, Adj4) :- Det \== [],
+																				Adj \== [],
+																				Nom \== [],
+																				Adj3 \== [],
+																				Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Adj2, Adj3, Adj4), Det, Adj, Adj2, [], Adj3, Adj4) :- Det \== [],
+																					Adj \== [],
+																					Adj2 \== [],
+																					Adj3 \== [],
+																					Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Adj2, Nom, Adj4), Det, Adj, Adj2, Nom, [], Adj4) :- Det \== [],
+																				Adj \== [],
+																				Adj2 \== [],
+																				Nom \== [],
+																				Adj4 \== [].
+verif_GNS(gNSimple(Det, Adj, Adj2, Nom, Adj3), Det, Adj, Adj2, Nom, Adj3, []) :- Det \== [],
+																					Adj \== [],
+																					Adj2 \== [],
+																					Nom \== [],
+																					Adj3 \== [].
+
+/* 6 */
 verif_GNS(gNSimple(Det, Adj, Adj2, Nom, Adj3, Adj4), Det, Adj, Adj2, Nom, Adj3, Adj4) :- Det \== [],
 																						Adj \== [],
 																						Adj2 \== [],
