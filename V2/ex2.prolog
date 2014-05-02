@@ -23,15 +23,29 @@ conjCoord(X) --> [X],
 
 adverbe(X, Y) --> [Mot], 
  				  {adverb(Mot, _, MotCanonique, _), Y =.. [MotCanonique, X]}.
+adverbe(Adv) --> [ne].
+adverbe(Adv) --> [n].
+adverbe(pas) --> [pas].
+
+prepo(X) --> [X],
+			 {prep(X, _, _,_)}.
 
 aux(X) --> [X], 
 		   {verb(X, _, 'être', _)}.
+aux(X) --> [X], 
+		   {verb(X, _, 'avoir', _)}.
 
 verbe(Z, X, Rep3) --> [Mot], 
 					  {verb(Mot, _, MotCanonique, _), Rep3 =.. [MotCanonique, Z, X]}.
+negverbe(Z, X, negation(Rep3)) --> [Mot], 
+					  {verb(Mot, _, MotCanonique, _), Rep3 =.. [MotCanonique, Z, X]}.
 
+participe(Z, X, Rep3) --> [Mot], 
+					  {verb(Mot, _, MotCanonique, ppast), Rep3 =.. [MotCanonique, Z, X]}.
+negparticipe(Z, X, negation(Rep3)) --> [Mot], 
+					  {verb(Mot, _, MotCanonique, ppast), Rep3 =.. [MotCanonique, Z, X]}.
 
-nom_propre(X) --> [jean].
+nom_propre(existe(X)) --> [jean].
 
 
 determinant(X, Rep1, Rep2, existe(X, Rep1, Rep2)) --> [Mot], 
@@ -44,18 +58,26 @@ determinant(X, Rep1, Rep2, existe(X, Rep1, Rep2)) --> [Mot],
 phrase(Rep) --> gn(X, Rep1, Rep), gv(X, Rep1).
 
 
+
+
 gn(X, _, _) --> nom_propre(X).
 gn(X, Rep1, Rep) -->	determinant(X, Rep2, Rep1, Rep),
 						nom_adj(X, Rep3),
 						relative(X, Rep3, Rep2).
-gn(et(X, Y), Rep1, Rep) --> nom_propre(X), 
-	  	 		     conjCoord(Conj),
-	  	 		     gn(Y, Rep1, Rep).
+gn(et(X, Y), Rep1, Rep) --> nom_propre(X),
+							relative(X, Rep2, Rep1),
+			  	 		    conjCoord(Conj),
+			  	 		    gn(Y, Rep3, Rep).
 gn(et(X, Y), Rep1, Rep) --> determinant(X, Rep2, Rep1, Rep4),
-					 nom_adj(X, Rep3),
-					 relative(X, Rep3, Rep2),
-	  	 		     conjCoord(Conj),
-	  	 		     gn(Y, Rep4, Rep).
+							nom_adj(X, Rep3),
+							relative(X, Rep3, Rep2),
+			  	 		    conjCoord(Conj),
+			  	 		    gn(Y, Rep4, Rep).
+gn(et(X, Y), Rep1, Rep) --> determinant(X, Rep2, Rep1, Rep4),
+							nom_adj(X, Rep3),
+						 	relative(X, Rep3, Rep2),
+							prepo(Prep),
+							gn(Y, Rep4, Rep).
 
 
 nom_adj(X, Rep) --> nom(X, Rep).
@@ -83,7 +105,9 @@ adjectifs(X, Rep1, Rep2) --> adjectif(X, Rep1),
 relative(X, Rep, Rep) --> [].
 relative(X, Rep1, et(Rep1, Rep2)) -->	pronRelatif(Pr),
 										gn(Z, Rep3, Rep2),
-										gv(Z, Rep3).
+										verbe(Z, X, Rep3).
+relative(X, Rep1, et(Rep1, Rep2)) -->	pronRelatif(Pr),
+										gv(Y, Rep2).
 relative(X, Rep1, et(Rep1, Rep2)) -->	pronRelatif(Pr),
 										aux(Aux),
 										complement(X, Rep2, Rep2).
@@ -91,9 +115,41 @@ relative(X, Rep1, et(Rep1, Rep2)) -->	pronRelatif(Pr),
 
 gv(X, Rep) -->	verbe(X, Y, Rep1),
 				gn(Y, Rep1, Rep).
+gv(X, Rep) --> verbe(X, Y, Rep1),
+			   complement(Z, Rep1, Rep).
+gv(X, Rep) --> aux(Aux),
+			   participe(X, Y, Rep1),
+			   gn(Y, Rep1, Rep).
+gv(X, Rep) --> aux(Aux),
+			   participe(X, Y, Rep1),
+			   complement(Y, Rep1, Rep).
 gv(X, Rep) -->	aux(Aux),
 				complement(X, Rep1, Rep).
+gv(X, Rep) --> adverbe(Adv),
+				negverbe(X, Y, Rep1),
+				adverbe(pas),
+				gn(Y, Rep1, Rep).
+gv(X, Rep) --> adverbe(Adv),
+			   negverbe(X, Y, Rep1),
+			   adverbe(pas),
+			   complement(Y, Rep1, Rep).
+gv(X, Rep) --> adverbe(Adv),
+			   aux(Aux),
+			   adverbe(pas),
+			   negparticipe(X, Y, Rep1),
+			   gn(Y, Rep1, Rep).
 
-complement(X, Rep, Rep) -->	adverbe(X, Rep).
+complement(_, _,  _) --> [].
+complement(X, Rep, Rep) -->	adverbes(X, Rep).
+complement(X, Y, Rep) --> adverbes(X, Y),
+						  adjectif(Y, Rep).
 complement(X, Rep, Rep) -->	adjectifs(X, Rep, Rep).
 complement(X, Rep, Rep) -->	determinant(X, _, _, _), nom(X, Rep).
+complement(X, Rep, Rep1) --> prepo(X),
+							 gn(Y, Rep, Rep1).
+complement(X, Rep, Rep1) --> prepo(X),
+							 adverbe(Rep, Rep1).
+
+adverbes(X, Y) --> adverbe(X, Y).
+adverbes(X, et(Y, Z)) --> adverbe(X, Y),
+						  adverbes(Y, Z).

@@ -62,11 +62,25 @@ de vue du francais qui sont effectivement reconnue par notre grammaire, ainsi qu
 
 Il y a évidement beaucoup d'erreurs, mais nous les avons autorisé pour pouvoir reconnaitre plus de phrase. Il faudrait
 pour pouvoir réduire ce nombre d'erreur avoir une base de connaissance avec des catégories grammaticales plus précises.
-Par exemple pour les adverbes, nous ne savons pas si c'est un adverbe de lieu, de temps ou de manière; pour kes verbes,
+Par exemple pour les adverbes, nous ne savons pas si c'est un adverbe de lieu, de temps ou de manière; pour les verbes,
 nous ne savons pas si le verbe est transitif ou intrensitif, et nous ne connaissont pas la catégorie exacte des déterminants.
 
 --
 
 La partie 2 concerne la création d'un arbre sémantique.
 
-blablabla ...
+Concernant l'arbre sémantique, j'avoue que plutôt complexe à comprendre.
+
+J'ai essayé de faire une grammaire plus étendu que possible, mais plus j'avançais 
+dans la grammaire, et plus les fonctionnalités du débuts disparaissaient
+donc pour éviter de m'arracher tous les cheveux, je préfère la laisser comme ça.
+
+Pour les exemples, étant donné le temps qu'il restait j'ai préféré faire court, mais j'ai choisi des
+exemples capables de représenter la grammaire.
+
+Je pense que c'est une partie intéressante, mais il est vrai aussi, que c'est plutôt 
+difficile à cerner et maitriser, un peu plus de cours ou de pratique n'aurait pas 
+fait de mal =).
+
+Je pense qu'au final même si nous n'avons pas terminé le projet, Kevin et moi 
+nous nous sommes bien amusés sur ce projet. Je crois qu'on aime bien le Prolog :-)

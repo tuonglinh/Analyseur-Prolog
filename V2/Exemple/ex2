@@ -1,0 +1,33 @@
+?- phrase(A, [le, chat, mange, la, souris], []).
+A = existe(_G349, chat(_G349), existe(_G367, souris(_G367), manger(_G349, _G367))) .
+
+
+
+?- phrase(A, [le, grand, chat, bleu, mange, la, belle, petite, souris, blanche], []).
+A = existe(_G382, et(chat(_G382), grand(_G382), bleu(_G382), _G389, _G390), existe(_G422, et(souris(_G422), beau(_G422), blanc(_G422), petit(_G422), _G436), manger(_G382, _G422))) .
+
+
+
+?- phrase(A, [un, grand, aviateur, malin, qui, 'était', 'doué', volait, vers, le, nord], []).
+A = existe(_G388, et(et(aviateur(_G388), grand(_G388), malin(_G388), _G395, _G396), doué(_G388)), existe(_G445, nord(_G445), voler(_G388, _G439))) .
+
+
+?- phrase(A, [le, lapin, qui, mange, une, carotte, deviendra, une, souris], []).
+A = existe(_G376, et(lapin(_G376), _G389), existe(_G421, souris(_G421), devenir(_G376, _G421))) .
+
+
+?- phrase(A, [le, grand, chat, bleu, manges, la, belle, petite, souris, blanche], []).
+A = existe(_G382, et(chat(_G382), grand(_G382), bleu(_G382), _G389, _G390), existe(_G422, et(souris(_G422), beau(_G422), blanc(_G422), petit(_G422), _G436), manger(_G382, _G422))) 
+
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, qui, ne, mange, pas, la, belle, petite, souris, blanche], []).
+A = existe(_G892, et(et(chat(_G892), grand(_G892), noir(_G892), _G899, blanc(_G892)), _G935), sourire(_G892, _G981)) 
+
+
+
+?- phrase(A, [le, grand, chat, noir, et, blanc, qui, ne, mange, pas, la, belle, petite, souris, blanche, est, un, grand, chat], []).
+A = existe(_G916, et(et(chat(_G916), grand(_G916), noir(_G916), _G923, blanc(_G916)), existe(_G969, et(souris(_G969), beau(_G969), blanc(_G969), petit(_G969), _G983), negation(manger(_G966, _G969)))), existe(_G1023, et(chat(_G1023), grand(_G1023), _G1035), être(_G916, _G1023))) 
+
+
+?- phrase(A, [le, lapin, mange, des, grandes, et, belles, carottes, poilues, et, grosses], []).
+A = existe(_G1347, lapin(_G1347), existe(_G1365, et(carotte(_G1365), grand(_G1365), poilu(_G1365), beau(_G1365), gros(_G1365)), manger(_G1347, _G1365))) .
